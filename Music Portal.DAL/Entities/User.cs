@@ -15,7 +15,6 @@ namespace Music_Portal.DAL.Entities
         public string Password { get; set; }
         public string Salt { get; set; }
         public Role? Role { get; set; }
-        public ICollection<Song>? Songs { get; set; }
 
     }
 }
