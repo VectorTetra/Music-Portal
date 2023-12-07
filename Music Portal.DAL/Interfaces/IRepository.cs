@@ -35,7 +35,8 @@ namespace Music_Portal.DAL.Interfaces
         Task<IEnumerable<Song>> GetAll();
         Task<Song?> Get(int id);
         Task<IEnumerable<Song>> GetByName(string name);
-        Task<IEnumerable<Song>> GetByGenre(string name);
+        Task<IEnumerable<Song>> GetByGenre(string searchGenre);
+        Task<IEnumerable<Song>> GetBySinger(string searchSinger);
         Task Create(Song song);
         void Update(Song song);
         Task Delete(int id);

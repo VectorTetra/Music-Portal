@@ -29,9 +29,13 @@ namespace Music_Portal.DAL.Repositories
         {
             return await _context.Songs.Where(o => o.Name.Contains(name)).ToListAsync();
         }
-        public async Task<IEnumerable<Song>> GetByGenre(string genre_name)
+        public async Task<IEnumerable<Song>> GetBySinger(string searchSinger)
         {
-            return await _context.Songs.Where(o => o.Genre.Name.Contains(genre_name)).ToListAsync();
+            return await _context.Songs.Where(o => o.Singers.Any(x=>x.Contains(searchSinger))).ToListAsync();
+        }
+        public async Task<IEnumerable<Song>> GetByGenre(string searchGenre)
+        {
+            return await _context.Songs.Where(o => o.Genre.Name.Contains(searchGenre)).ToListAsync();
         }
         public async Task Create(Song song)
         {
