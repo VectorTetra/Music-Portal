@@ -18,7 +18,6 @@ namespace Music_Portal.DAL.Repositories
         {
             _context = context;
         }
-
         public async Task<IEnumerable<Genre>> GetAll()
         {
             return await _context.Genres.ToListAsync();
