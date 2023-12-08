@@ -83,27 +83,27 @@ namespace Music_Portal.BLL.Services
         }
         public async Task<IEnumerable<SongDTO>> GetAllSongs() 
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Song, SongDTO>();
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<Song, SongDTO>());
             var mapper = new Mapper(config);
             return mapper.Map<IEnumerable<Song>, IEnumerable<SongDTO>>(await Database.Songs.GetAll());
         }
         public async Task<IEnumerable<SongDTO>> GetSongsByName(string searchName) 
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Song, SongDTO>();
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<Song, SongDTO>());
             var mapper = new Mapper(config);
             return mapper.Map<IEnumerable<Song>, IEnumerable<SongDTO>>(await Database.Songs.GetByName(searchName));
         }
         public async Task<IEnumerable<SongDTO>> GetSongsByGenre(string searchGenre) 
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Song, SongDTO>();
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<Song, SongDTO>());
             var mapper = new Mapper(config);
             return mapper.Map<IEnumerable<Song>, IEnumerable<SongDTO>>(await Database.Songs.GetByGenre(searchGenre));
         }
         public async Task<IEnumerable<SongDTO>> GetSongsBySinger(string searchSinger)
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Song, SongDTO>();
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<Song, SongDTO>());
             var mapper = new Mapper(config);
-            return mapper.Map<IEnumerable<Song>, IEnumerable<SongDTO>>(await Database.Songs.(searchGenre));
+            return mapper.Map<IEnumerable<Song>, IEnumerable<SongDTO>>(await Database.Songs.GetBySinger(searchSinger));
         }
     }
 }
