@@ -28,19 +28,19 @@ namespace Music_Portal.DAL.Repositories
         }
         public async Task<IEnumerable<User>> GetByLogin(string login)
         {
-            return await _context.Users.Where(o=> o.Login.Contains(login)).ToListAsync();
+            return await _context.Users.Where(o=> o.Login.Contains(login) && o.Role.Description != "Адміністратор").ToListAsync();
         }
         public async Task<IEnumerable<User>> GetNotAuthorizedUsers()
         {
-            return await _context.Users.Where(o => o.Role.Id == 0).ToListAsync();
+            return await _context.Users.Where(o => o.Role.Description == "Неавторизований користувач").ToListAsync();
         }
         public async Task<IEnumerable<User>> GetAuthorizedUsers()
         {
-            return await _context.Users.Where(o => o.Role.Id == 1).ToListAsync();
+            return await _context.Users.Where(o => o.Role.Description == "Авторизований користувач").ToListAsync();
         }
         public async Task<IEnumerable<User>> GetBlockedUsers()
         {
-            return await _context.Users.Where(o => o.Role.Id == -1).ToListAsync();
+            return await _context.Users.Where(o => o.Role.Description == "Заблокований користувач").ToListAsync();
         }
         public async Task Create(User user)
         {
