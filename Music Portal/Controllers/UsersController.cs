@@ -101,7 +101,7 @@ namespace Music_Portal.Controllers
             {
                 var user = await userService.GetUser(id);
                 await userService.DeleteUser(id);
-                return Ok(user);
+                return new ObjectResult(user);
             }
             catch (ValidationException ex)
             {
