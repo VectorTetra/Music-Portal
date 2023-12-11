@@ -147,7 +147,7 @@ namespace Music_Portal.BLL.Services
             }
             else
             {
-                User.Role.Id = 1;
+                User.Role.Id = 3;
                 await Database.Save();
             }
         }
@@ -160,7 +160,7 @@ namespace Music_Portal.BLL.Services
             }
             else
             {
-                User.Role.Id = -1;
+                User.Role.Id = 1;
                 await Database.Save();
             }
         }
@@ -216,10 +216,11 @@ namespace Music_Portal.BLL.Services
         {
             var config = new MapperConfiguration(cfg => cfg.CreateMap<User, UserDTO>()
             .ForMember("RoleId", opt => opt.MapFrom(c => c.Role.Id))
-            .ForMember("Id",opt => opt.MapFrom(c=>c.Id))
-            .ForMember("FirstName",opt => opt.MapFrom(c=>c.FirstName))
-            .ForMember("LastName",opt => opt.MapFrom(c=>c.LastName))
-            .ForMember("Login",opt=>opt.MapFrom(c=>c.Login)));
+            //.ForMember("Id",opt => opt.MapFrom(c=>c.Id))
+            //.ForMember("FirstName",opt => opt.MapFrom(c=>c.FirstName))
+            //.ForMember("LastName",opt => opt.MapFrom(c=>c.LastName))
+            //.ForMember("Login",opt=>opt.MapFrom(c=>c.Login))
+            );
             var mapper = new Mapper(config);
             return mapper.Map<IEnumerable<User>, IEnumerable<UserDTO>>(await Database.Users.GetAll());
         }
@@ -227,10 +228,11 @@ namespace Music_Portal.BLL.Services
         {
             var config = new MapperConfiguration(cfg => cfg.CreateMap<User, UserDTO>()
             .ForMember("RoleId", opt => opt.MapFrom(c => c.Role.Id))
-            .ForMember("Id", opt => opt.MapFrom(c => c.Id))
-            .ForMember("FirstName", opt => opt.MapFrom(c => c.FirstName))
-            .ForMember("LastName", opt => opt.MapFrom(c => c.LastName))
-            .ForMember("Login", opt => opt.MapFrom(c => c.Login)));
+            //.ForMember("Id", opt => opt.MapFrom(c => c.Id))
+            //.ForMember("FirstName", opt => opt.MapFrom(c => c.FirstName))
+            //.ForMember("LastName", opt => opt.MapFrom(c => c.LastName))
+            //.ForMember("Login", opt => opt.MapFrom(c => c.Login))
+            );
             var mapper = new Mapper(config);
             return mapper.Map<IEnumerable<User>, IEnumerable<UserDTO>>(await Database.Users.GetByLogin(search));
         }
@@ -238,10 +240,11 @@ namespace Music_Portal.BLL.Services
         {
             var config = new MapperConfiguration(cfg => cfg.CreateMap<User, UserDTO>()
                 .ForMember("RoleId", opt => opt.MapFrom(c => c.Role.Id))
-                .ForMember("Id", opt => opt.MapFrom(c => c.Id))
-                .ForMember("FirstName", opt => opt.MapFrom(c => c.FirstName))
-                .ForMember("LastName", opt => opt.MapFrom(c => c.LastName))
-                .ForMember("Login", opt => opt.MapFrom(c => c.Login)));
+                //.ForMember("Id", opt => opt.MapFrom(c => c.Id))
+                //.ForMember("FirstName", opt => opt.MapFrom(c => c.FirstName))
+                //.ForMember("LastName", opt => opt.MapFrom(c => c.LastName))
+                //.ForMember("Login", opt => opt.MapFrom(c => c.Login))
+                );
             var mapper = new Mapper(config);
             return mapper.Map<IEnumerable<User>, IEnumerable<UserDTO>>(await Database.Users.GetAuthorizedUsers());
         }
@@ -249,10 +252,11 @@ namespace Music_Portal.BLL.Services
         {
             var config = new MapperConfiguration(cfg => cfg.CreateMap<User, UserDTO>()
                 .ForMember("RoleId", opt => opt.MapFrom(c => c.Role.Id))
-                .ForMember("Id", opt => opt.MapFrom(c => c.Id))
-                .ForMember("FirstName", opt => opt.MapFrom(c => c.FirstName))
-                .ForMember("LastName", opt => opt.MapFrom(c => c.LastName))
-                .ForMember("Login", opt => opt.MapFrom(c => c.Login)));
+                //.ForMember("Id", opt => opt.MapFrom(c => c.Id))
+                //.ForMember("FirstName", opt => opt.MapFrom(c => c.FirstName))
+                //.ForMember("LastName", opt => opt.MapFrom(c => c.LastName))
+                //.ForMember("Login", opt => opt.MapFrom(c => c.Login))
+                );
             var mapper = new Mapper(config);
             return mapper.Map<IEnumerable<User>, IEnumerable<UserDTO>>(await Database.Users.GetNotAuthorizedUsers());
         }
@@ -260,10 +264,11 @@ namespace Music_Portal.BLL.Services
         {
             var config = new MapperConfiguration(cfg => cfg.CreateMap<User, UserDTO>()
                 .ForMember("RoleId", opt => opt.MapFrom(c => c.Role.Id))
-                .ForMember("Id", opt => opt.MapFrom(c => c.Id))
-                .ForMember("FirstName", opt => opt.MapFrom(c => c.FirstName))
-                .ForMember("LastName", opt => opt.MapFrom(c => c.LastName))
-                .ForMember("Login", opt => opt.MapFrom(c => c.Login)));
+                //.ForMember("Id", opt => opt.MapFrom(c => c.Id))
+                //.ForMember("FirstName", opt => opt.MapFrom(c => c.FirstName))
+                //.ForMember("LastName", opt => opt.MapFrom(c => c.LastName))
+                //.ForMember("Login", opt => opt.MapFrom(c => c.Login))
+                );
             var mapper = new Mapper(config);
             return mapper.Map<IEnumerable<User>, IEnumerable<UserDTO>>(await Database.Users.GetBlockedUsers());
         }

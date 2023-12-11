@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.8.34322.80
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Music Portal", "Music Portal\Music Portal.csproj", "{7164C40E-0C90-446A-A211-5AF8E657CADE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{47F30C1E-4CED-4EE0-A9E9-0F3C12B4CD82} = {47F30C1E-4CED-4EE0-A9E9-0F3C12B4CD82}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Music Portal.DAL", "Music Portal.DAL\Music Portal.DAL.csproj", "{72A1023F-4A8A-46FF-895D-8C83DE704E90}"
 EndProject

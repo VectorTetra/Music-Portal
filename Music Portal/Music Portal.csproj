@@ -7,4 +7,8 @@
     <RootNamespace>Music_Portal</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Music Portal.BLL\Music Portal.BLL.csproj" />
+  </ItemGroup>
+
 </Project>
