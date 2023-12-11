@@ -129,7 +129,7 @@ namespace Music_Portal.BLL.Services
                             FirstName = MeaningUser.FirstName,
                             LastName = MeaningUser.LastName,
                             Login = MeaningUser.Login,
-                            RoleId = MeaningUser.Role.Id
+                            RoleId = MeaningUser.RoleId
                         };
                     }                 
 
@@ -147,7 +147,7 @@ namespace Music_Portal.BLL.Services
             }
             else
             {
-                User.Role.Id = 3;
+                User.RoleId = 3;
                 await Database.Save();
             }
         }
@@ -160,7 +160,7 @@ namespace Music_Portal.BLL.Services
             }
             else
             {
-                User.Role.Id = 1;
+                User.RoleId = 1;
                 await Database.Save();
             }
         }
@@ -208,14 +208,14 @@ namespace Music_Portal.BLL.Services
                     LastName = User.LastName,
                     Login = User.Login,
                     Id = User.Id,
-                    RoleId = User.Role.Id
+                    RoleId = User.RoleId
                 };
             }
         }
         public async Task<IEnumerable<UserDTO>> GetAllUsers()
         {
             var config = new MapperConfiguration(cfg => cfg.CreateMap<User, UserDTO>()
-            .ForMember("RoleId", opt => opt.MapFrom(c => c.Role.Id))
+            //.ForMember("RoleId", opt => opt.MapFrom(c => c.Role.Id))
             //.ForMember("Id",opt => opt.MapFrom(c=>c.Id))
             //.ForMember("FirstName",opt => opt.MapFrom(c=>c.FirstName))
             //.ForMember("LastName",opt => opt.MapFrom(c=>c.LastName))
@@ -227,7 +227,7 @@ namespace Music_Portal.BLL.Services
         public async Task<IEnumerable<UserDTO>> GetUsersByLogin(string search)
         {
             var config = new MapperConfiguration(cfg => cfg.CreateMap<User, UserDTO>()
-            .ForMember("RoleId", opt => opt.MapFrom(c => c.Role.Id))
+            //.ForMember("RoleId", opt => opt.MapFrom(c => c.Role.Id))
             //.ForMember("Id", opt => opt.MapFrom(c => c.Id))
             //.ForMember("FirstName", opt => opt.MapFrom(c => c.FirstName))
             //.ForMember("LastName", opt => opt.MapFrom(c => c.LastName))
@@ -239,7 +239,7 @@ namespace Music_Portal.BLL.Services
         public async Task<IEnumerable<UserDTO>> GetAuthorizedUsers()
         {
             var config = new MapperConfiguration(cfg => cfg.CreateMap<User, UserDTO>()
-                .ForMember("RoleId", opt => opt.MapFrom(c => c.Role.Id))
+                //.ForMember("RoleId", opt => opt.MapFrom(c => c.Role.Id))
                 //.ForMember("Id", opt => opt.MapFrom(c => c.Id))
                 //.ForMember("FirstName", opt => opt.MapFrom(c => c.FirstName))
                 //.ForMember("LastName", opt => opt.MapFrom(c => c.LastName))
@@ -251,7 +251,7 @@ namespace Music_Portal.BLL.Services
         public async Task<IEnumerable<UserDTO>> GetNonAuthorizedUsers()
         {
             var config = new MapperConfiguration(cfg => cfg.CreateMap<User, UserDTO>()
-                .ForMember("RoleId", opt => opt.MapFrom(c => c.Role.Id))
+                //.ForMember("RoleId", opt => opt.MapFrom(c => c.Role.Id))
                 //.ForMember("Id", opt => opt.MapFrom(c => c.Id))
                 //.ForMember("FirstName", opt => opt.MapFrom(c => c.FirstName))
                 //.ForMember("LastName", opt => opt.MapFrom(c => c.LastName))
@@ -263,7 +263,7 @@ namespace Music_Portal.BLL.Services
         public async Task<IEnumerable<UserDTO>> GetBlockedUsers()
         {
             var config = new MapperConfiguration(cfg => cfg.CreateMap<User, UserDTO>()
-                .ForMember("RoleId", opt => opt.MapFrom(c => c.Role.Id))
+                //.ForMember("RoleId", opt => opt.MapFrom(c => c.Role.Id))
                 //.ForMember("Id", opt => opt.MapFrom(c => c.Id))
                 //.ForMember("FirstName", opt => opt.MapFrom(c => c.FirstName))
                 //.ForMember("LastName", opt => opt.MapFrom(c => c.LastName))

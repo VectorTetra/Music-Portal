@@ -17,7 +17,7 @@
                 <span id="label-nickname" style="display:none;"></span>
                 <span id="label-roleid" style="display:none;"></span>
                 <a class="navbar-brand" id="ref-users">Користувачі</a>
-                <a class="navbar-brand" id="ref-genres" style="display:none;">Жанри</a>
+                <a class="navbar-brand" id="ref-genres">Жанри</a>
                 <a class="navbar-brand" id="ref-songs" style="display:none;">Пісні</a>
                 <a class="navbar-brand" id="ref-logout" style="display:none;">Вийти</a>
             </div>
@@ -44,45 +44,45 @@
             $("#ref-register").on("click", LoadPageRegister);
             $("#ref-login").on("click", LoadPageLogin);
             $("#ref-users").on("click", LoadPageUsers);
-            $("#ref-genres").on("click", function () { });
+            $("#ref-genres").on("click", LoadPageGenres);
             $("#ref-songs").on("click", function () { });
             $("#ref-logout").on("click", function () { });
 
             function LoadPageRegister() {
                 $("#pseudobody").html(
                     `<h1>Реєстрація</h1>
-                         <hr />
-                         <div class="row">
-                             <div class="col-md-4">
-                                 <form asp-action="Register" method="post">
-                                     <div asp-validation-summary="ModelOnly" class="text-danger" id="registerform-reg-error-span"></div>
-                                     <div class="form-group">
-                                         <label class="control-label">Ім'я</label>
-                                             <input asp-for="FirstName" class="form-control" id="registerform-firstname" required/>
-                                     </div>
-                                     <div class="form-group">
-                                         <label class="control-label">Прізвище</label>
-                                             <input asp-for="LastName" class="form-control" id="registerform-lastname" required/>
-                                     </div>
-                                     <div class="form-group">
-                                         <label class="control-label">Логін</label>
-                                         <input asp-for="Login" class="form-control" id="registerform-login" required/>
-                                     </div>
-                                     <div class="form-group">
-                                         <label class="control-label">Пароль</label>
-                                             <input type="password" class="form-control" id="registerform-password" required/>
-                                     </div>
-                                     <div class="form-group">
-                                         <label class="control-label">Повторіть пароль</label>
-                                             <input type="password" class="form-control" id="registerform-passwordconfirm" required/>
-                                     </div>
-                                     <br>
-                                     <div class="form-group">
-                                         <input type="button" value="Зареєструватися" class="btn btn-primary" id="registerform-submit"/>
-                                     </div>
-                                 </form>
-                             </div>
-                         </div>`
+                             <hr />
+                             <div class="row">
+                                 <div class="col-md-4">
+                                     <form asp-action="Register" method="post">
+                                         <div asp-validation-summary="ModelOnly" class="text-danger" id="registerform-reg-error-span"></div>
+                                         <div class="form-group">
+                                             <label class="control-label">Ім'я</label>
+                                                 <input asp-for="FirstName" class="form-control" id="registerform-firstname" required/>
+                                         </div>
+                                         <div class="form-group">
+                                             <label class="control-label">Прізвище</label>
+                                                 <input asp-for="LastName" class="form-control" id="registerform-lastname" required/>
+                                         </div>
+                                         <div class="form-group">
+                                             <label class="control-label">Логін</label>
+                                             <input asp-for="Login" class="form-control" id="registerform-login" required/>
+                                         </div>
+                                         <div class="form-group">
+                                             <label class="control-label">Пароль</label>
+                                                 <input type="password" class="form-control" id="registerform-password" required/>
+                                         </div>
+                                         <div class="form-group">
+                                             <label class="control-label">Повторіть пароль</label>
+                                                 <input type="password" class="form-control" id="registerform-passwordconfirm" required/>
+                                         </div>
+                                         <br>
+                                         <div class="form-group">
+                                             <input type="button" value="Зареєструватися" class="btn btn-primary" id="registerform-submit"/>
+                                         </div>
+                                     </form>
+                                 </div>
+                             </div>`
 
                 );
             }
@@ -90,104 +90,106 @@
             function LoadPageLogin() {
                 $("#pseudobody").html(
                     `<h1>Увійти</h1>
-                         <hr />
-                         <div class="row">
-                             <div class="col-md-4">
-                                 <form asp-action="Login" method="post">
-                                     <div asp-validation-summary="ModelOnly" class="text-danger" id="loginform-login-error-span"></div>
-                                     <div class="form-group">
-                                         <label class="control-label">Логін</label>
-                                         <input class="form-control" id="loginform-login" name="loginform-login" required/>
-                                     </div>
-                                     <div class="form-group">
-                                         <label class="control-label">Пароль</label>
-                                         <input type="password" class="form-control" id="loginform-password" name="loginform-password" required/>
-                                     </div>
+                             <hr />
+                             <div class="row">
+                                 <div class="col-md-4">
+                                     <form asp-action="Login" method="post">
+                                         <div asp-validation-summary="ModelOnly" class="text-danger" id="loginform-login-error-span"></div>
+                                         <div class="form-group">
+                                             <label class="control-label">Логін</label>
+                                             <input class="form-control" id="loginform-login" name="loginform-login" required/>
+                                         </div>
+                                         <div class="form-group">
+                                             <label class="control-label">Пароль</label>
+                                             <input type="password" class="form-control" id="loginform-password" name="loginform-password" required/>
+                                         </div>
+                                         <br />
+                                         <div class="form-group">
+                                             <input type="button" value="Увійти" class="btn btn-primary" id="loginform-submit"/>
+                                         </div>
+                                     </form>
                                      <br />
-                                     <div class="form-group">
-                                         <input type="button" value="Увійти" class="btn btn-primary" id="loginform-submit"/>
-                                     </div>
-                                 </form>
-                                 <br />
-                                 <form>
-                                     <input type="button" value="Реєстрація" id="loginform-register"/>
-                                 </form>
-                             </div>
-                         </div>`
+                                     <form>
+                                         <input type="button" value="Реєстрація" id="loginform-register"/>
+                                     </form>
+                                 </div>
+                             </div>`
 
                 );
             }
 
+            // Створити розмітку сторінки користувачів
             function LoadPageUsers() {
                 $("#pseudobody").html(
                     `    <h3>Редагувати користувача</h3>
-                         <form name="userForm" style="border:1px solid black;border-radius:5px;">
-                            <input type="hidden" name="Id" value="0" />
-                            <table style="width:100%;">
-                                <tr>
-                                    <td>
-                                        <div style="padding:0 15px 0 15px;">
-                                            <label for="firstName">Ім'я:</label>
-                                            <input class="form-control" name="name" required/>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div style="padding:0 15px 0 15px;">
-                                            <label for="lastName">Прізвище:</label>
-                                            <input class="form-control" name="surname" required/>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div style="padding:0 15px 0 15px;">
-                                            <label for="login">Логін:</label>
-                                            <input class="form-control" name="login" required/>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div style="padding:0 15px 0 15px;">
-                                            <label for="role">Рівень доступу:</label>
-                                            <select class="form-control" name="role" required>
-                                                <option value="1">Заблокований</option>
-                                                <option value="3">Авторизований</option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                            <div class="panel-body" style="margin:15px 0 15px 15px;">
-                                <a id="userFormSubmit" class="btn btn-primary">Зберегти</a>
-                                <a id="userFormReset" class="btn btn-primary">Очистити</a>
-                            </div>
-                        </form>
-                         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-                             <div class="container-fluid">
-                                 <span class="navbar-brand">Категорія :</span>
-                                 <a class="navbar-brand btn btn-info" id="ref-AuhtorizedUsers">Авторизовані</a>
-                                 <a class="navbar-brand btn btn-info" id="ref-NonAuhtorizedUsers">Неавторизовані</a>
-                                 <a class="navbar-brand btn btn-info" id="ref-BlockedUsers">Заблоковані</a>
-                             </div>
-                             <input class="form-control" id="userSearchField" placeholder="Введіть логін для пошуку..."/>
-                         </nav>
-                         <h3 id="PageUsersCaption">Авторизовані користувачі</h3>    
-                         <form name="userTableForm">
-                             <br>
-                             <table class="table table-condensed table-striped" style="width:100%;">
-                                 <thead>
-                                     <tr>
-                                         <td>Id</td>
-                                         <td>Логін</td>
-                                         <td>Ім'я</td>
-                                         <td>Прізвище</td>
-                                         <td></td>
-                                     </tr>
-                                 </thead>
-                                 <tbody id="PageUsersTBody">
+                             <form name="userForm" style="border:1px solid black;border-radius:5px;">
+                                <input type="hidden" name="Id" value="0" />
+                                <table style="width:100%;">
+                                    <tr>
+                                        <td>
+                                            <div style="padding:0 15px 0 15px;">
+                                                <label for="firstName">Ім'я:</label>
+                                                <input class="form-control" name="firstName" required/>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="padding:0 15px 0 15px;">
+                                                <label for="lastName">Прізвище:</label>
+                                                <input class="form-control" name="lastName" required/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="padding:0 15px 0 15px;">
+                                                <label for="login">Логін:</label>
+                                                <input class="form-control" name="login" required/>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="padding:0 15px 0 15px;">
+                                                <label for="role">Рівень доступу:</label>
+                                                <select class="form-control" name="role" id="role" required>
+                                                    <option value="1">Заблокований</option>
+                                                    <option value="3">Авторизований</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <div class="panel-body" style="margin:15px 0 15px 15px;">
+                                    <a id="userFormSubmit" class="btn btn-primary">Зберегти</a>
+                                    <a id="userFormReset" class="btn btn-primary">Очистити</a>
+                                </div>
+                            </form>
+                             <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                                 <div class="container-fluid">
+                                     <span class="navbar-brand">Категорія :</span>
+                                     <a class="navbar-brand btn btn-info" id="ref-AuhtorizedUsers">Авторизовані</a>
+                                     <a class="navbar-brand btn btn-info" id="ref-NonAuhtorizedUsers">Неавторизовані</a>
+                                     <a class="navbar-brand btn btn-info" id="ref-BlockedUsers">Заблоковані</a>
+                                 </div>
+                                 <input class="form-control" id="userSearchField" placeholder="Введіть логін для пошуку..."/>
+                             </nav>
+                             <h3 id="PageUsersCaption">Авторизовані користувачі</h3>
+                             <form name="userTableForm">
+                                 <br>
+                                 <table class="table table-condensed table-striped" style="width:100%;">
+                                     <thead>
+                                         <tr>
+                                             <td>Id</td>
+                                             <td>Логін</td>
+                                             <td>Ім'я</td>
+                                             <td>Прізвище</td>
+                                             <td></td>
+                                             <td></td>
+                                         </tr>
+                                     </thead>
+                                     <tbody id="PageUsersTBody">
 
-                                 </tbody>
-                             </table>
-                         </form>`
+                                     </tbody>
+                                 </table>
+                             </form>`
                 );
                 $("#ref-AuhtorizedUsers").on("click", LoadAuthorizedUsers);
                 $("#ref-NonAuhtorizedUsers").on("click", LoadNonAuthorizedUsers);
@@ -199,46 +201,22 @@
                     form.reset();
                     form.elements["Id"].value = 0;
                 });
-                $("#userFormSubmit").on("click",function (e) {
+                $("#userFormSubmit").on("click", function (e) {
                     e.preventDefault();
                     var form = document.forms["userForm"];
                     var id = form.elements["Id"].value;
                     var firstName = form.elements["firstName"].value;
                     var lastName = form.elements["lastName"].value;
                     var login = form.elements["login"].value;
-                    var roleid = form.elements["role"].value;
+                    var roleId = parseInt(form.elements["role"].value);
 
-                    
+
                     if (id != 0)
-                    EditUser(id, firstName, lastName, login, roleid);
+                        EditUser(id, firstName, lastName, login, roleId);
                 });
                 LoadAuthorizedUsers();
             }
-
-            function LoadPageGenres() {
-                //$("#pseudobody").html(
-                //    `<h1 id="PageUsersCaption">Жанри</h1>
-                //     <hr />
-                //     <table class="table table-condensed table-striped" style="width:100%;">
-                //         <thead>
-                //             <tr>
-                //                 <td>Id</td>
-                //                 <td>Логін</td>
-                //                 <td>Ім'я</td>
-                //                 <td>Прізвище</td>
-                //                 <td></td>
-                //             </tr>
-                //         </thead>
-                //         <tbody id="PageUsersTBody">
-
-                //         </tbody>
-                //     </table>`
-                //);
-                //$("#ref-AuhtorizedUsers").on("click", LoadAuthorizedUsers);
-                //$("#ref-NonAuhtorizedUsers").on("click", LoadNonAuthorizedUsers);
-                //$("#ref-BlockedUsers").on("click", LoadBlockedUsers);
-                //LoadAuthorizedUsers();
-            }
+            // Шукати користувачів за логіном
             function SearchUsersByLogin() {
                 $("#PageUsersCaption").text('Пошук за логіном');
                 SearchingUsersTableCaption();
@@ -275,6 +253,7 @@
                     ThereAreNoUsersTableCaption();
                 }
             }
+            // Відобразити авторизованих користувачів
             function LoadAuthorizedUsers() {
                 $("#PageUsersCaption").text('Авторизовані користувачі');
                 SearchingUsersTableCaption();
@@ -306,6 +285,7 @@
                     }
                 });
             }
+            // Відобразити неавторизованих користувачів
             function LoadNonAuthorizedUsers() {
                 $("#PageUsersCaption").text('Неавторизовані користувачі');
                 SearchingUsersTableCaption();
@@ -337,6 +317,7 @@
                     }
                 });
             }
+            // Відобразити заблокованих користувачів
             function LoadBlockedUsers() {
                 $("#PageUsersCaption").text('Заблоковані користувачі');
                 SearchingUsersTableCaption();
@@ -368,6 +349,7 @@
                     }
                 });
             }
+            // Сформувати рядок з користувачем для таблиці користувачів
             var row = function (user) {
                 return `<tr data-rowid='${user.id}'>
                             <td>${user.id}</td>
@@ -378,39 +360,47 @@
                             <td><a class='removeLink btn btn-danger' data-id='${user.id}'>Видалити</a></td>
                             </tr>`;
             };
+            // Показати в таблиці користувачів повідомлення "Немає користувачів"
             function ThereAreNoUsersTableCaption() {
                 $("#PageUsersTBody").html("<tr><td colspan='6'><h3>Немає користувачів</h3></td></tr>");
             }
+            // Показати в таблиці користувачів повідомлення "Триває пошук користувачів..."
             function SearchingUsersTableCaption() {
                 $("#PageUsersTBody").html("<tr><td colspan='6'><h3>Триває пошук користувачів...</h3></td></tr>");
             }
-            function EditUser(id, firstName, lastName, login, roleid)
-            {
-                let request = JSON.stringify({
-                    id: id,
-                    firstName: firstName,
-                    lastName: lastName,
-                    login: login,
-                    roleid: roleid
-                });
-                $.ajax({
-                    url: 'https://localhost:7112/api/Users',
-                    contentType: "application/json",
-                    method: "PUT",
-                    data: request,
-                    success: function (user) {
-                        $("tr[data-rowid='" + user.id + "']").replaceWith(row(user));
-                        var form = document.forms["userForm"];
-                        form.reset();
-                        form.elements["Id"].value = 0;
-                    },
-                    error: function (x, y, z) {
-                        alert(x + '\n' + y + '\n' + z);
-                    }
-                });
+            // Редагувати користувача
+            function EditUser(id, firstName, lastName, login, roleid) {
+                if (firstName.length == 0 | lastName.length == 0 | login.length == 0 | isNaN(roleid)) {
+                    alert('Всі поля повинні бути заповнені!');
+                }
+                else {
+                    let request = JSON.stringify({
+                        id: id,
+                        firstName: firstName,
+                        lastName: lastName,
+                        login: login,
+                        roleid: roleid
+                    });
+                    $.ajax({
+                        url: 'https://localhost:7112/api/Users',
+                        contentType: "application/json",
+                        method: "PUT",
+                        data: request,
+                        success: function (user) {
+                            $("tr[data-rowid='" + user.id + "']").replaceWith(row(user));
+                            var form = document.forms["userForm"];
+                            form.reset();
+                            form.elements["Id"].value = 0;
+                        },
+                        error: function (x, y, z) {
+                            alert(x + '\n' + y + '\n' + z);
+                        }
+                    });
+                    $("#userSearchField").val(login);
+                    SearchUsersByLogin();
+                }
             }
-
-            // Удаление пользователя
+            // Видалити користувача (через підтвердження)
             function DeleteUser(id) {
                 if (!confirm("Ви справді бажаєте видалити користувача?"))
                     return;
@@ -426,8 +416,7 @@
                     }
                 });
             }
-
-            // Получение одного пользователя
+            // Заповнити форму даними вибраного в списку користувача
             function GetUser(id) {
                 $.ajax({
                     url: `https://localhost:7112/api/users/` + id,
@@ -439,24 +428,264 @@
                         form.elements["firstName"].value = user.firstName;
                         form.elements["lastName"].value = user.lastName;
                         form.elements["login"].value = user.login;
-                        form.elements["role"].value = user.roleid;
+                        form.elements["role"].value = user.roleId.toString();
                     },
                     error: function (x, y, z) {
                         alert(x + '\n' + y + '\n' + z);
                     }
                 });
             }
-
-            // нажимаем на ссылку Изменить
+            // Обробник події на кнопці "Змінити користувача"
             $("body").on("click", ".editLink", function () {
                 var id = $(this).data("id");
                 GetUser(id);
             });
-
-            // нажимаем на ссылку Удалить
+            // Обробник події на кнопці "Видалити користувача"
             $("body").on("click", ".removeLink", function () {
                 var id = $(this).data("id");
                 DeleteUser(id);
+            });
+            //======================================================================================
+            //======================================================================================
+            //======================================================================================
+
+            // Створити розмітку сторінки жанрів
+            function LoadPageGenres() {
+                $("#pseudobody").html(
+                    `<h3>Додати / Редагувати жанр</h3>
+                             <form name="genreForm" style="border:1px solid black;border-radius:5px;">
+                                <input type="hidden" name="Id" value="0" />
+                                <table style="width:100%;">
+                                    <tr>
+                                        <td>
+                                            <div style="padding:0 15px 0 15px;">
+                                                <label for="name">Назва:</label>
+                                                <input class="form-control" name="name" required/>
+                                       </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="padding:0 15px 0 15px;">
+                                                <label for="description">Логін:</label>
+                                                <textarea class="form-control" name="description"/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <div class="panel-body" style="margin:15px 0 15px 15px;">
+                                    <a id="genreFormSubmit" class="btn btn-primary">Зберегти</a>
+                                    <a id="genreFormReset" class="btn btn-primary">Очистити</a>
+                                </div>
+                            </form>
+                         <h1 id="PageGenresCaption">Жанри</h1>
+                         <hr />
+                         <input class="form-control" id="genreSearchField" placeholder="Введіть назву для пошуку..."/>
+                         <table class="table table-condensed table-striped" style="width:100%;">
+                             <thead>
+                                 <tr>
+                                     <td>Id</td>
+                                     <td>Назва</td>
+                                     <td>Опис</td>
+                                     <td></td>
+                                     <td></td>
+                                 </tr>
+                             </thead>
+                             <tbody id="PageGenresTBody">
+
+                             </tbody>
+                         </table>`
+                );
+                $("#genreSearchField").on("input", SearchGenresByName);
+                $("#genreFormReset").on("click", function (e) {
+                    e.preventDefault();
+                    var form = document.forms["genreForm"];
+                    form.reset();
+                    form.elements["Id"].value = 0;
+                });
+                $("#genreFormSubmit").on("click", function (e) {
+                    e.preventDefault();
+                    var form = document.forms["genreForm"];
+                    var id = form.elements["Id"].value;
+                    var name = form.elements["name"].value;
+                    var description = form.elements["description"].value;
+
+                    if (id != 0)
+                        EditGenre(id, name, description);
+                    else
+                        CreateGenre(name, description);
+                });
+                LoadGenres();
+            }
+            // Відобразити всі жанри
+            function LoadGenres() {
+                $("#PageGenresCaption").text('Жанри');
+                SearchingGenresTableCaption();
+                $.ajax({
+                    url: 'https://localhost:7112/api/Genres',
+                    method: "GET",
+                    data: {
+                        collectionType: "All",
+                        searchedName: "0"
+                    },
+                    contentType: "application/json",
+                    success: function (genres) {
+                        $("#PageGenresTBody").html("");
+                        var rows = "";
+                        if (Object.keys(genres).length == 0) {
+                            ThereAreNoGenresTableCaption();
+                        }
+                        else {
+                            $.each(genres, function (index, genre) {
+                                // добавляем полученные элементы в таблицу
+                                rows += rowGenre(genre);
+                            })
+                        }
+
+                        $("#PageGenresTBody").append(rows);
+                    },
+                    error: function (x, y, z) {
+                        alert(x + '\n' + y + '\n' + z);
+                    }
+                });
+            }
+            // Сформувати рядок з жанром для таблиці жанрів
+            var rowGenre = function (genre) {
+                return `<tr data-rowid='${genre.id}'>
+                            <td>${genre.id}</td>
+                            <td>${genre.name}</td>
+                            <td>${genre.description}</td>
+                            <td><a class='editGenreLink btn btn-info' data-id='${genre.id}'>Редагувати</a></td>
+                            <td><a class='removeGenreLink btn btn-danger' data-id='${genre.id}'>Видалити</a></td>
+                            </tr>`;
+            }
+            // Показати в таблиці жанрів повідомлення "Немає жанрів"
+            function ThereAreNoGenresTableCaption() {
+                $("#PageGenresTBody").html("<tr><td colspan='6'><h3>Немає жанрів</h3></td></tr>");
+            }
+            // Показати в таблиці жанрів повідомлення "Триває пошук жанрів..."
+            function SearchingGenresTableCaption() {
+                $("#PageGenresTBody").html("<tr><td colspan='6'><h3>Триває пошук жанрів...</h3></td></tr>");
+            }
+            function SearchGenresByName() {
+                $("#PageGenresCaption").text('Пошук жанрів за назвою');
+                SearchingGenresTableCaption();
+                if ($("#genreSearchField").val()) {
+                    $.ajax({
+                        url: 'https://localhost:7112/api/Genres',
+                        method: "GET",
+                        data: {
+                            collectionType: "Searching",
+                            searchedName: $("#genreSearchField").val()
+                        },
+                        contentType: "application/json",
+                        success: function (genres) {
+                            $("#PageGenresTBody").html("");
+                            var rows = "";
+                            if (Object.keys(genres).length == 0) {
+                                ThereAreNoGenresTableCaption();
+                            }
+                            else {
+                                $.each(genres, function (index, genre) {
+                                    // добавляем полученные элементы в таблицу
+                                    rows += rowGenre(genre);
+                                })
+                            }
+
+                            $("#PageGenresTBody").append(rows);
+                        },
+                        error: function (x, y, z) {
+                            alert(x + '\n' + y + '\n' + z);
+                        }
+                    });
+                }
+                else {
+                    LoadGenres();
+                }
+            }
+            // Редагувати жанр
+            function EditGenre(id, name, description) {
+                let request = JSON.stringify({
+                    id: id,
+                    name: name,
+                    description: description
+                });
+                $.ajax({
+                    url: 'https://localhost:7112/api/Genres',
+                    contentType: "application/json",
+                    method: "PUT",
+                    data: request,
+                    success: function (genre) {
+                        $("tr[data-rowid='" + genre.id + "']").replaceWith(rowGenre(genre));
+                        var form = document.forms["genreForm"];
+                        form.reset();
+                        form.elements["Id"].value = 0;
+                    },
+                    error: function (x, y, z) {
+                        alert(x + '\n' + y + '\n' + z);
+                    }
+                });
+            }
+            function CreateGenre(name, description) {
+                let request = JSON.stringify({
+                    name: name,
+                    description: description
+                });
+                $.ajax({
+                    url: 'https://localhost:7112/api/Genres',
+                    contentType: "application/json",
+                    method: "POST",
+                    data: request,
+                    success: function (genre) {
+                        LoadGenres();
+                        var form = document.forms["genreForm"];
+                        form.reset();
+                        form.elements["Id"].value = 0;
+                    },
+                    error: function (x, y, z) {
+                        alert(x + '\n' + y + '\n' + z);
+                    }
+                });
+            }
+            function GetGenre(id) {
+                $.ajax({
+                    url: `https://localhost:7112/api/genres/` + id,
+                    method: 'GET',
+                    contentType: "application/json",
+                    success: function (genre) {
+                        var form = document.forms["genreForm"];
+                        form.elements["Id"].value = genre.id;
+                        form.elements["name"].value = genre.name;
+                        form.elements["description"].value = genre.description;
+                    },
+                    error: function (x, y, z) {
+                        alert(x + '\n' + y + '\n' + z);
+                    }
+                });
+            }
+            function DeleteGenre(id) {
+                if (!confirm("Ви справді бажаєте видалити жанр?"))
+                    return;
+                $.ajax({
+                    url: 'https://localhost:7112/api/genres/' + id,
+                    contentType: "application/json",
+                    method: "DELETE",
+                    success: function (genre) {
+                        $("tr[data-rowid='" + genre.id + "']").remove();
+                    },
+                    error: function (x, y, z) {
+                        alert(x + '\n' + y + '\n' + z);
+                    }
+                });
+            }
+            $("body").on("click", ".editGenreLink", function () {
+                var id = $(this).data("id");
+                GetGenre(id);
+            });
+            // Обробник події на кнопці "Видалити користувача"
+            $("body").on("click", ".removeGenreLink", function () {
+                var id = $(this).data("id");
+                DeleteGenre(id);
             });
 
         });
