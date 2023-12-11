@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+п»їusing Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Music_Portal.BLL.DTO;
 using Music_Portal.BLL.Infrastructure;
@@ -9,10 +9,10 @@ using System.Linq;
 
 namespace Music_Portal.Controllers
 {
-    // Необхідно підключити 
-    [ApiController]
+    // РќРµРѕР±С…С–РґРЅРѕ РїС–РґРєР»СЋС‡РёС‚Рё 
     [Route("api/Users")]
-    public class UsersController : Controller
+    [ApiController]
+    public class UsersController : ControllerBase
     {
         private readonly IUserService userService;
 
@@ -44,7 +44,7 @@ namespace Music_Portal.Controllers
                     }
                     break;
                 default:
-                    { // Якщо немає правильного варіанту - повернути пусту колекцію
+                    { // РЇРєС‰Рѕ РЅРµРјР°С” РїСЂР°РІРёР»СЊРЅРѕРіРѕ РІР°СЂС–Р°РЅС‚Сѓ - РїРѕРІРµСЂРЅСѓС‚Рё РїСѓСЃС‚Сѓ РєРѕР»РµРєС†С–СЋ
                         collec = new List<UserDTO>();
                     }
                     break;
@@ -69,7 +69,7 @@ namespace Music_Portal.Controllers
             {
                 return NotFound(ex.Message);
             }
-            
+
         }
         [HttpPut]
         public async Task<ActionResult<UserDTO>> PutUser(UserDTO userDTO)
@@ -82,16 +82,23 @@ namespace Music_Portal.Controllers
             {
                 var user = await userService.GetUser(userDTO.Id);
                 await userService.UpdateUser(userDTO);
-                return Ok(userDTO);
+                switch (userDTO.RoleId)
+                {
+                    case 1: { await userService.BlockUser(userDTO); } break;
+                    case 3: { await userService.ActivateUser(userDTO); } break;
+                    default:
+                        break;
+                }
+                return new ObjectResult(userDTO);
             }
             catch (ValidationException ex)
             {
                 return NotFound(ex.Message);
-            }            
+            }
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<UserDTO>> DeleteStudent(int id)
+        public async Task<ActionResult<UserDTO>> DeleteUser(int id)
         {
             if (!ModelState.IsValid)
             {
