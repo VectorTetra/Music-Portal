@@ -46,8 +46,9 @@
             $("#ref-users").on("click", LoadPageUsers);
             $("#ref-genres").on("click", LoadPageGenres);
             $("#ref-songs").on("click", LoadPageSongs);
-            $("#ref-logout").on("click", function () { });
+            $("#ref-logout").on("click", LogOut);
 
+            // Завантажити сторінку реєстрації 
             function LoadPageRegister() {
                 $("#pseudobody").html(
                     `<h1>Реєстрація</h1>
@@ -86,7 +87,7 @@
                 );
                 $("#registerform-submit").on("click", TryToRegister);
             }
-
+            // Подати запит на реєстрацію
             function TryToRegister()
             {
                 let firstname = $("#registerform-firstname").val();
@@ -125,6 +126,8 @@
             //======================================================================================
             //======================================================================================
             //======================================================================================
+
+            // Завантажити сторінку авторизації 
             function LoadPageLogin() {
                 $("#pseudobody").html(
                     `<h1>Увійти</h1>
@@ -156,6 +159,7 @@
                 $("#loginform-submit").on("click", TryToLogin);
                 $("#registerform-redirect").on("click", LoadPageRegister);
             }
+            // Подати запит на авторизацію
             function TryToLogin() {
                 let login = $("#loginform-login").val();
                 let password = $("#loginform-password").val();
@@ -192,7 +196,6 @@
                                 $("#ref-genres").css("display", "inline");
                                 LoadPageUsers();
                             }
-                            
                         }
                         else {
                             alert(user);
@@ -206,6 +209,32 @@
             //======================================================================================
             //======================================================================================
             //======================================================================================
+
+            // Вийти з акаунту
+            function LogOut() {
+                if (confirm("Ви справді хочете вийти з акаунту?"))
+                {
+                    $("#pseudobody").html(
+                        `<h1 class="display-4">Увійдіть або зареєструйтеся</h1>`
+                    );
+                    $("#label-fullname").text(null);
+                    $("#label-fullname").css("display", "none");
+                    $("#label-nickname").text(null);
+                    $("#label-nickname").css("display", "none");
+                    $("#label-roleid").text(null);
+                    $("#ref-songs").css("display", "none");
+                    $("#ref-logout").css("display", "none");
+                    $("#ref-register").css("display", "inline");
+                    $("#ref-login").css("display", "inline");
+                    $("#ref-users").css("display", "none");
+                    $("#ref-genres").css("display", "none");
+                }
+            }
+
+            //======================================================================================
+            //======================================================================================
+            //======================================================================================
+
             // Створити розмітку сторінки користувачів
             function LoadPageUsers() {
                 $("#pseudobody").html(
