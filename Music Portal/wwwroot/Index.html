@@ -45,7 +45,7 @@
             $("#ref-login").on("click", LoadPageLogin);
             $("#ref-users").on("click", LoadPageUsers);
             $("#ref-genres").on("click", LoadPageGenres);
-            $("#ref-songs").on("click", function () { });
+            $("#ref-songs").on("click", LoadPageSongs);
             $("#ref-logout").on("click", function () { });
 
             function LoadPageRegister() {
@@ -85,8 +85,47 @@
                              </div>`
 
                 );
+                $("#registerform-submit").on("click", TryToRegister);
             }
 
+            function TryToRegister()
+            {
+                let firstname = $("#registerform-firstname").val();
+                let lastname = $("#registerform-lastname").val();
+                let login = $("#registerform-login").val();
+                let password = $("#registerform-password").val();
+                let passwordconfirm = $("#registerform-passwordconfirm").val();
+
+               
+                let request = JSON.stringify({
+                    firstName: firstname,
+                    lastName: lastname,
+                    login: login,
+                    password: password,
+                    passwordconfirm:passwordconfirm
+                });
+                $.ajax({
+                    url: 'https://localhost:7112/api/Register',
+                    contentType: "application/json",
+                    method: "POST",
+                    data: request,
+                    success: function (user) {
+                        if (user.firstname) {
+                            alert("Реєстрація успішна!");
+                            LoadPageLogin();
+                        }
+                        else {
+                            alert(user);
+                        }
+                    },
+                    error: function (x, y, z) {
+                        alert(x + '\n' + y + '\n' + z);
+                    }
+                });
+            }
+            //======================================================================================
+            //======================================================================================
+            //======================================================================================
             function LoadPageLogin() {
                 $("#pseudobody").html(
                     `<h1>Увійти</h1>
@@ -117,7 +156,9 @@
 
                 );
             }
-
+            //======================================================================================
+            //======================================================================================
+            //======================================================================================
             // Створити розмітку сторінки користувачів
             function LoadPageUsers() {
                 $("#pseudobody").html(
@@ -567,6 +608,7 @@
             function SearchingGenresTableCaption() {
                 $("#PageGenresTBody").html("<tr><td colspan='6'><h3>Триває пошук жанрів...</h3></td></tr>");
             }
+            // Шукати жанри за назвою
             function SearchGenresByName() {
                 $("#PageGenresCaption").text('Пошук жанрів за назвою');
                 SearchingGenresTableCaption();
@@ -691,7 +733,99 @@
                 var id = $(this).data("id");
                 DeleteGenre(id);
             });
+            //======================================================================================
+            //======================================================================================
+            //======================================================================================
 
+            // Створити розмітку сторінки пісень
+            function LoadPageSongs()
+            {
+                $("#pseudobody").html(
+                    `<h3 id="songFormCaption"></h3>
+                      <form name="songForm" style="border:1px solid black;border-radius:5px;">
+                         <input type="hidden" name="Id" value="0" />
+                         <table style="width:100%;">
+                             <tr>
+                                 <td>
+                                     <div style="padding:0 15px 0 15px;">
+                                         <label for="name">Назва:</label>
+                                         <input class="form-control" name="name" required/>
+                                </div>
+                                 </td>
+                             </tr>
+                             <tr>
+                                 <td>
+                                     <div style="padding:0 15px 0 15px;">
+                                         <label for="description">Логін:</label>
+                                         <textarea class="form-control" name="description"/>
+                                     </div>
+                                 </td>
+                             </tr>
+                         </table>
+                         <div class="panel-body" style="margin:15px 0 15px 15px;">
+                             <a id="genreFormSubmit" class="btn btn-primary">Зберегти</a>
+                             <a id="genreFormReset" class="btn btn-primary">Очистити</a>
+                         </div>
+                     </form>
+                  <h1 id="PageGenresCaption">Жанри</h1>
+                  <hr />
+                  <input class="form-control" id="genreSearchField" placeholder="Введіть назву для пошуку..."/>
+                  <table class="table table-condensed table-striped" style="width:100%;">
+                      <thead>
+                          <tr>
+                              <td>Id</td>
+                              <td>Назва</td>
+                              <td>Опис</td>
+                              <td></td>
+                              <td></td>
+                          </tr>
+                      </thead>
+                      <tbody id="PageGenresTBody">
+
+                      </tbody>
+                  </table>`
+                );
+                $("#genreSearchField").on("input", SearchGenresByName);
+                $("#genreFormReset").on("click", function (e) {
+                    e.preventDefault();
+                    var form = document.forms["genreForm"];
+                    form.reset();
+                    form.elements["Id"].value = 0;
+                });
+                $("#genreFormSubmit").on("click", function (e) {
+                    e.preventDefault();
+                    var form = document.forms["genreForm"];
+                    var id = form.elements["Id"].value;
+                    var name = form.elements["name"].value;
+                    var description = form.elements["description"].value;
+
+                    if (id != 0)
+                        EditGenre(id, name, description);
+                    else
+                        CreateGenre(name, description);
+                });
+                LoadGenres();
+            }
+            // Відобразити всі пісні
+            function LoadSongs() { }
+            // Сформувати рядок з піснею для таблиці пісень
+            var rowSong = function (song) { }
+            // Показати в таблиці пісень повідомлення "Немає пісень"
+            function ThereAreNoSongsTableCaption() { }
+            // Показати в таблиці пісень повідомлення "Триває пошук пісень..."
+            function SearchingSongsTableCaption() { }
+            // Шукати пісні за назвою пісні
+            function SearchSongsByName() { }
+            // Шукати пісні за назвою жанру
+            function SearchSongsByGenre() { }
+            // Шукати пісні за виконавцем
+            function SearchSongsBySinger() { }
+            // Заповнити форму даними вибраної в списку пісні
+            function GetSong() { }
+            // Завантажити пісню на клієнт
+            function DownloadSong() { }
+            // Завантажити пісню на сервер
+            function UploadSong(){ }
         });
     </script>
 </body>

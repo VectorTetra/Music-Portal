@@ -27,16 +27,21 @@ namespace Music_Portal.BLL.Services
         {
             //Перш ніж зареєструватись, треба перевірити, чи є такий логін в БД
             var BusyLoginUsersCollection = await Database.Users.GetByLogin(regDto.Login);
-            if (BusyLoginUsersCollection.ToList().Count > 0)
+            if (BusyLoginUsersCollection.ToList().Any(x => x.Login == regDto.Login))
             {
                 throw new ValidationException("Такий логін вже зайнято", "");
+            }
+            if (regDto.Password != regDto.PasswordConfirm)
+            {
+                throw new ValidationException("Паролі не співпадають", "");
             }
             var newUser = new User
             {
                 Id = regDto.Id,
                 FirstName = regDto.FirstName,
                 LastName = regDto.LastName,
-                Login = regDto.Login
+                Login = regDto.Login, 
+                RoleId = 2
             };
 
             byte[] saltbuf = new byte[16];
