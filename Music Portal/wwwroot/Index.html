@@ -16,8 +16,8 @@
                 <span id="label-fullname" style="display:none;"></span>
                 <span id="label-nickname" style="display:none;"></span>
                 <span id="label-roleid" style="display:none;"></span>
-                <a class="navbar-brand" id="ref-users">Користувачі</a>
-                <a class="navbar-brand" id="ref-genres">Жанри</a>
+                <a class="navbar-brand" id="ref-users" style="display:none;">Користувачі</a>
+                <a class="navbar-brand" id="ref-genres" style="display:none;">Жанри</a>
                 <a class="navbar-brand" id="ref-songs" style="display:none;">Пісні</a>
                 <a class="navbar-brand" id="ref-logout" style="display:none;">Вийти</a>
             </div>
@@ -54,15 +54,14 @@
                              <hr />
                              <div class="row">
                                  <div class="col-md-4">
-                                     <form asp-action="Register" method="post">
-                                         <div asp-validation-summary="ModelOnly" class="text-danger" id="registerform-reg-error-span"></div>
+                                     <form method="post">
                                          <div class="form-group">
                                              <label class="control-label">Ім'я</label>
-                                                 <input asp-for="FirstName" class="form-control" id="registerform-firstname" required/>
+                                             <input asp-for="FirstName" class="form-control" id="registerform-firstname" required/>
                                          </div>
                                          <div class="form-group">
                                              <label class="control-label">Прізвище</label>
-                                                 <input asp-for="LastName" class="form-control" id="registerform-lastname" required/>
+                                             <input asp-for="LastName" class="form-control" id="registerform-lastname" required/>
                                          </div>
                                          <div class="form-group">
                                              <label class="control-label">Логін</label>
@@ -110,7 +109,7 @@
                     method: "POST",
                     data: request,
                     success: function (user) {
-                        if (user.firstname) {
+                        if (user.firstName) {
                             alert("Реєстрація успішна!");
                             LoadPageLogin();
                         }
@@ -129,32 +128,80 @@
             function LoadPageLogin() {
                 $("#pseudobody").html(
                     `<h1>Увійти</h1>
-                             <hr />
-                             <div class="row">
-                                 <div class="col-md-4">
-                                     <form asp-action="Login" method="post">
-                                         <div asp-validation-summary="ModelOnly" class="text-danger" id="loginform-login-error-span"></div>
-                                         <div class="form-group">
-                                             <label class="control-label">Логін</label>
-                                             <input class="form-control" id="loginform-login" name="loginform-login" required/>
-                                         </div>
-                                         <div class="form-group">
-                                             <label class="control-label">Пароль</label>
-                                             <input type="password" class="form-control" id="loginform-password" name="loginform-password" required/>
-                                         </div>
-                                         <br />
-                                         <div class="form-group">
-                                             <input type="button" value="Увійти" class="btn btn-primary" id="loginform-submit"/>
-                                         </div>
-                                     </form>
-                                     <br />
-                                     <form>
-                                         <input type="button" value="Реєстрація" id="loginform-register"/>
-                                     </form>
-                                 </div>
-                             </div>`
+                        <hr />
+                        <div class="row">
+                            <div class="col-md-4">
+                                <form method="post">
+                                    <div class="form-group">
+                                        <label class="control-label">Логін</label>
+                                        <input class="form-control" id="loginform-login" name="loginform-login" required/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Пароль</label>
+                                        <input type="password" class="form-control" id="loginform-password" name="loginform-password" required/>
+                                    </div>
+                                    <br />
+                                    <div class="form-group">
+                                        <input type="button" value="Увійти" class="btn btn-primary" id="loginform-submit"/>
+                                    </div>
+                                </form>
+                                <br />
+                                <form>
+                                    <input type="button" value="Реєстрація" id="registerform-redirect"/>
+                                </form>
+                            </div>
+                        </div>`
 
                 );
+                $("#loginform-submit").on("click", TryToLogin);
+                $("#registerform-redirect").on("click", LoadPageRegister);
+            }
+            function TryToLogin() {
+                let login = $("#loginform-login").val();
+                let password = $("#loginform-password").val();
+
+
+                let request = JSON.stringify({
+                    login: login,
+                    password: password
+                });
+                $.ajax({
+                    url: 'https://localhost:7112/api/Login',
+                    contentType: "application/json",
+                    method: "POST",
+                    data: request,
+                    success: function (user) {
+                        if (user.firstName) {
+                            alert("Авторизація успішна!");
+                            $("#label-fullname").text(`${user.firstName} ${user.lastName}`);
+                            $("#label-fullname").css("display", "inline");
+                            $("#label-nickname").text(`${user.login}`);
+                            $("#label-nickname").css("display", "inline");
+                            $("#label-roleid").text(`${user.roleId}`);
+                            $("#ref-songs").css("display", "inline");
+                            $("#ref-logout").css("display", "inline");
+                            $("#ref-register").css("display", "none");
+                            $("#ref-login").css("display", "none");
+                            // Якщо це звичайний користувач 
+                            if (user.roleId == 3) {
+                                LoadPageSongs();
+                            }
+                            // Якщо це адмін
+                            if (user.roleId == 4) {
+                                $("#ref-users").css("display", "inline");
+                                $("#ref-genres").css("display", "inline");
+                                LoadPageUsers();
+                            }
+                            
+                        }
+                        else {
+                            alert(user);
+                        }
+                    },
+                    error: function (x, y, z) {
+                        alert(x + '\n' + y + '\n' + z);
+                    }
+                });
             }
             //======================================================================================
             //======================================================================================

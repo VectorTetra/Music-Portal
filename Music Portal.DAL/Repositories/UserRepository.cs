@@ -28,7 +28,7 @@ namespace Music_Portal.DAL.Repositories
         }
         public async Task<IEnumerable<User>> GetByLogin(string login)
         {
-            return await _context.Users.Where(o=> o.Login.Contains(login) && o.Role.Description != "Адміністратор").ToListAsync();
+            return await _context.Users.Where(o=> o.Login.Contains(login)).ToListAsync();
         }
         public async Task<IEnumerable<User>> GetNotAuthorizedUsers()
         {
