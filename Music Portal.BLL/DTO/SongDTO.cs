@@ -16,7 +16,7 @@ namespace Music_Portal.BLL.DTO
         public string Name { get; set; }
         [MyAttributeNonEmptyList(ErrorMessage = "У пісні має бути хоча б один виконавець")]
         [Display(Name = "Виконавці")]
-        public List<string> Singers { get; set; }
+        public string Singers { get; set; }
         [Required(ErrorMessage = "Поле обов'язкове для заповнення.")]
         [Display(Name = "Аудіофайл")]
         public string Path { get; set; }
