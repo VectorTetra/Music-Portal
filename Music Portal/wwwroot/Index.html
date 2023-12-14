@@ -906,61 +906,78 @@
             function LoadSongs() {
                 $("#PageSongsCaption").text('Пісні');
                 SearchingSongsTableCaption();
+                let genresCollection;
                 $.ajax({
-                    url: 'https://localhost:7112/api/Songs',
+                    url: 'https://localhost:7112/api/Genres',
                     method: "GET",
                     data: {
                         collectionType: "All",
-                        searchParameter: "0"
+                        searchedName: "0"
                     },
                     contentType: "application/json",
-                    success: function (songs) {
-                        $("#PageSongsTBody").html("");
-                        var rows = "";
-                        if (Object.keys(songs).length == 0) {
-                            ThereAreNoSongsTableCaption();
-                        }
-                        else {
-                            $.each(songs, function (index, song) {
-                                // добавляем полученные элементы в таблицу
-                                rows += rowSong(song, $("#label-roleid").text());
-                            })
-                        }
+                    success: function (genres) {
+                        genresCollection = Object.values(genres);
+                        console.log(typeof (genres));
+                        console.log(typeof (genresCollection));
+                        $.ajax({
+                            url: 'https://localhost:7112/api/Songs',
+                            method: "GET",
+                            data: {
+                                collectionType: "All",
+                                searchParameter: "0"
+                            },
+                            contentType: "application/json",
+                            success: function (songs) {
+                                $("#PageSongsTBody").html("");
+                                var rows = "";
+                                if (Object.keys(songs).length == 0) {
+                                    ThereAreNoSongsTableCaption();
+                                }
+                                else {
+                                    $.each(songs, function (index, song) {
+                                        // Отримати жанр, який співпадає з genreId даної пісні (у вигляді масиву, треба взяти 0 індекс)
+                                        let genre = genresCollection.filter((g) => g.id == song.genreId);
+                                        // Додати новий рядок в таблицю
+                                        rows += rowSong(song, genre[0].name, $("#label-roleid").text());
+                                    })
+                                }
 
-                        $("#PageSongsTBody").append(rows);
+                                $("#PageSongsTBody").append(rows);
+                            },
+                            error: function (x, y, z) {
+                                alert(x + '\n' + y + '\n' + z);
+                            }
+                        });
                     },
                     error: function (x, y, z) {
-                        alert(x + '\n' + y + '\n' + z);
+                        alert("Помилка під час завантаження жанрів!");
                     }
                 });
+                
+                
+               
             }
             // Сформувати рядок з піснею для таблиці пісень
-            var rowSong = function (song, roleid) {
-                $.when(GetGenreNameForSong(song.genreId)
-                ).then(
-                    function (genre) {
-                        console.log(genre.name);
-                        if (roleid == "3") {
-                            return `<tr data-rowid='${song.id}' data-genreid='${song.genreId}'>
-                                    <td>${song.name}</td>
-                                    <td>${song.singers}</td>
-                                    <td>${genre.name}</td>
-                                    <td colspan='3'><a class='downloadLink btn btn-primary' data-id='${song.id}'>Завантажити</a></td>
-                                    </tr>`;
-                        }
-                        if (roleid == "4") {
-                            return `<tr data-rowid='${song.id}' data-genreid='${song.genreId}'>
-                                    <td>${song.name}</td>
-                                    <td>${song.singers}</td>
-                                    <td>${genre.name}</td>
-                                    <td><a class='downloadSongLink btn btn-primary' data-id='${song.id}'>Завантажити</a></td>
-                                    <td><a class='editSongLink btn btn-info' data-id='${song.id}'>Редагувати</a></td>
-                                    <td><a class='removeSongLink btn btn-danger' data-id='${song.id}'>Видалити</a></td>
-                                    </tr>`;
-                        }
-                    }
-                )
-
+            var rowSong = function (song, genreName, roleid) {
+                
+                if (roleid == "3") {
+                    return `<tr data-rowid='${song.id}' data-genreid='${song.genreId}'>
+                            <td>${song.name}</td>
+                            <td>${song.singers}</td>
+                            <td>${genreName}</td>
+                            <td colspan='3'><a class='downloadLink btn btn-primary' data-id='${song.id}'>Завантажити</a></td>
+                            </tr>`;
+                }
+                if (roleid == "4") {
+                    return `<tr data-rowid='${song.id}' data-genreid='${song.genreId}'>
+                            <td>${song.name}</td>
+                            <td>${song.singers}</td>
+                            <td>${genreName}</td>
+                            <td><a class='downloadSongLink btn btn-primary' data-id='${song.id}'>Завантажити</a></td>
+                            <td><a class='editSongLink btn btn-info' data-id='${song.id}'>Редагувати</a></td>
+                            <td><a class='removeSongLink btn btn-danger' data-id='${song.id}'>Видалити</a></td>
+                            </tr>`;
+                }
 
             }
             // Показати в таблиці пісень повідомлення "Немає пісень"
@@ -1092,22 +1109,9 @@
             //// Завантажити пісню на сервер
             //function UploadSong() { }
             // Отримати назву жанру для конкретної пісні
-            function GetGenreNameForSong(genreId) {
-                return $.ajax({
-                    url: `https://localhost:7112/api/genres/` + genreId,
-                    method: 'GET',
-                    contentType: "application/json",
-                    success: function (genre) {
-                        //console.log(typeof (genre));
-                        //console.log(genre.name);
-                        data = genre.name;
-                        /*console.log(data);*/
-
-                    },
-                    error: function (x, y, z) {
-                        alert("Помилка під завантаження назви жанру");
-                    }
-                });
+            function GetGenreNameForSong(element, index, array) {
+                
+                
                 
             }
 
