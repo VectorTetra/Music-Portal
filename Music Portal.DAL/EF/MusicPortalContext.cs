@@ -35,7 +35,8 @@ namespace Music_Portal.DAL.EF
                 Genres.Add(new Genre { Name = "Народна музика", Description = "Досить популярним стилем є і народна музика, що відноситься до музичного фольклору. Композиції представляють собою музично-поетичні творчі ідеї народу, які передаються з покоління в покоління. Традиційні мелодії зазвичай створюються сільським населенням. Такий напрям музики є вагомим протиставленням популярному і академічного співу. В основі текстів лежать різні мотиви, починаючи від теплих любовних відносин, закінчуючи страшними і жахливими військовими подіями." });
                 Genres.Add(new Genre { Name = "Транс", Description = "Транс є різновидом електронної музики, характерними ознаками якого є штучне звучання, приділення особливої уваги гармонійним партіям і тембрів, а також відносно швидкий темп (від 120 до 150 ударів на хвилину). Зазвичай транс використовується для проведення різних танцювальних заходів." });
                 SaveChanges();
-                Users.Add(new User { FirstName = "Адміністратор", LastName = "порталу", Login = "admin", Password = "FDC0DE9CC6D9B39614A604405C51085E", Salt = "8BEFCC69C14504BB5D42BEE48FA24619", Role = Roles.ElementAt(3) });
+                Users.Add(new User { FirstName = "Адміністратор", LastName = "порталу", Login = "admin", Password = "C89DB7CD26A99131F872EA9544148E87", Salt = "F4D3FB2CA189AC1AA3BCFCC642D94D8C", Role = Roles.ElementAt(3) });
+                Users.Add(new User { FirstName = "Користувач", LastName = "звичайний", Login = "user", Password = "944560C66F6A8525A921C6529D95B196", Salt = "D08B2D19140768EF03DB1A07E44905B9", Role = Roles.ElementAt(2) });
                 SaveChanges();
                 Songs.Add(new Song { Name = "Memory Reboot", GenreId = 8, Path = "/Files/MemoryReboot.mp3", Singers = "VOJ,Narvent" });
                 SaveChanges();
