@@ -54,37 +54,37 @@
             function LoadPageRegister() {
                 $("#pseudobody").html(
                     `<h1>Реєстрація</h1>
-                     <hr />
-                     <div class="row">
-                         <div class="col-md-4">
-                             <form method="post">
-                                 <div class="form-group">
-                                     <label class="control-label">Ім'я</label>
-                                     <input asp-for="FirstName" class="form-control" id="registerform-firstname" required/>
+                             <hr />
+                             <div class="row">
+                                 <div class="col-md-4">
+                                     <form method="post">
+                                         <div class="form-group">
+                                             <label class="control-label">Ім'я</label>
+                                             <input asp-for="FirstName" class="form-control" id="registerform-firstname" required/>
+                                         </div>
+                                         <div class="form-group">
+                                             <label class="control-label">Прізвище</label>
+                                             <input asp-for="LastName" class="form-control" id="registerform-lastname" required/>
+                                         </div>
+                                         <div class="form-group">
+                                             <label class="control-label">Логін</label>
+                                             <input asp-for="Login" class="form-control" id="registerform-login" required/>
+                                         </div>
+                                         <div class="form-group">
+                                             <label class="control-label">Пароль</label>
+                                                 <input type="password" class="form-control" id="registerform-password" required/>
+                                         </div>
+                                         <div class="form-group">
+                                             <label class="control-label">Повторіть пароль</label>
+                                                 <input type="password" class="form-control" id="registerform-passwordconfirm" required/>
+                                         </div>
+                                         <br>
+                                         <div class="form-group">
+                                             <input type="button" value="Зареєструватися" class="btn btn-primary" id="registerform-submit"/>
+                                         </div>
+                                     </form>
                                  </div>
-                                 <div class="form-group">
-                                     <label class="control-label">Прізвище</label>
-                                     <input asp-for="LastName" class="form-control" id="registerform-lastname" required/>
-                                 </div>
-                                 <div class="form-group">
-                                     <label class="control-label">Логін</label>
-                                     <input asp-for="Login" class="form-control" id="registerform-login" required/>
-                                 </div>
-                                 <div class="form-group">
-                                     <label class="control-label">Пароль</label>
-                                         <input type="password" class="form-control" id="registerform-password" required/>
-                                 </div>
-                                 <div class="form-group">
-                                     <label class="control-label">Повторіть пароль</label>
-                                         <input type="password" class="form-control" id="registerform-passwordconfirm" required/>
-                                 </div>
-                                 <br>
-                                 <div class="form-group">
-                                     <input type="button" value="Зареєструватися" class="btn btn-primary" id="registerform-submit"/>
-                                 </div>
-                             </form>
-                         </div>
-                     </div>`
+                             </div>`
 
                 );
                 $("#registerform-submit").on("click", TryToRegister);
@@ -132,29 +132,29 @@
             function LoadPageLogin() {
                 $("#pseudobody").html(
                     `<h1>Увійти</h1>
-                <hr />
-                <div class="row">
-                    <div class="col-md-4">
-                        <form method="post">
-                            <div class="form-group">
-                                <label class="control-label">Логін</label>
-                                <input class="form-control" id="loginform-login" name="loginform-login" required/>
+                        <hr />
+                        <div class="row">
+                            <div class="col-md-4">
+                                <form method="post">
+                                    <div class="form-group">
+                                        <label class="control-label">Логін</label>
+                                        <input class="form-control" id="loginform-login" name="loginform-login" required/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Пароль</label>
+                                        <input type="password" class="form-control" id="loginform-password" name="loginform-password" required/>
+                                    </div>
+                                    <br />
+                                    <div class="form-group">
+                                        <input type="button" value="Увійти" class="btn btn-primary" id="loginform-submit"/>
+                                    </div>
+                                </form>
+                                <br />
+                                <form>
+                                    <input type="button" value="Реєстрація" id="registerform-redirect"/>
+                                </form>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label">Пароль</label>
-                                <input type="password" class="form-control" id="loginform-password" name="loginform-password" required/>
-                            </div>
-                            <br />
-                            <div class="form-group">
-                                <input type="button" value="Увійти" class="btn btn-primary" id="loginform-submit"/>
-                            </div>
-                        </form>
-                        <br />
-                        <form>
-                            <input type="button" value="Реєстрація" id="registerform-redirect"/>
-                        </form>
-                    </div>
-                </div>`
+                        </div>`
 
                 );
                 $("#loginform-submit").on("click", TryToLogin);
@@ -239,74 +239,74 @@
             function LoadPageUsers() {
                 $("#pseudobody").html(
                     `    <h3>Редагувати користувача</h3>
-                     <form name="userForm" style="border:1px solid black;border-radius:5px;">
-                        <input type="hidden" name="Id" value="0" />
-                        <table style="width:100%;">
-                            <tr>
-                                <td>
-                                    <div style="padding:0 15px 0 15px;">
-                                        <label for="firstName">Ім'я:</label>
-                                        <input class="form-control" name="firstName" required/>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div style="padding:0 15px 0 15px;">
-                                        <label for="lastName">Прізвище:</label>
-                                        <input class="form-control" name="lastName" required/>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div style="padding:0 15px 0 15px;">
-                                        <label for="login">Логін:</label>
-                                        <input class="form-control" name="login" required/>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div style="padding:0 15px 0 15px;">
-                                        <label for="role">Рівень доступу:</label>
-                                        <select class="form-control" name="role" id="role" required>
-                                            <option value="1">Заблокований</option>
-                                            <option value="3">Авторизований</option>
-                                        </select>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                        <div class="panel-body" style="margin:15px 0 15px 15px;">
-                            <a id="userFormSubmit" class="btn btn-primary">Зберегти</a>
-                            <a id="userFormReset" class="btn btn-primary">Очистити</a>
-                        </div>
-                    </form>
-                     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-                         <div class="container-fluid">
-                             <span class="navbar-brand">Категорія :</span>
-                             <a class="navbar-brand btn btn-info" id="ref-AuhtorizedUsers">Авторизовані</a>
-                             <a class="navbar-brand btn btn-info" id="ref-NonAuhtorizedUsers">Неавторизовані</a>
-                             <a class="navbar-brand btn btn-info" id="ref-BlockedUsers">Заблоковані</a>
-                         </div>
-                         <input class="form-control" id="userSearchField" placeholder="Введіть логін для пошуку..."/>
-                     </nav>
-                     <h3 id="PageUsersCaption">Авторизовані користувачі</h3>
-                     <form name="userTableForm">
-                         <br>
-                         <table class="table table-condensed table-striped" style="width:100%;">
-                             <thead>
-                                 <tr>
-                                     <td>Id</td>
-                                     <td>Логін</td>
-                                     <td>Ім'я</td>
-                                     <td>Прізвище</td>
-                                     <td></td>
-                                     <td></td>
-                                 </tr>
-                             </thead>
-                             <tbody id="PageUsersTBody">
+                             <form name="userForm" style="border:1px solid black;border-radius:5px;">
+                                <input type="hidden" name="Id" value="0" />
+                                <table style="width:100%;">
+                                    <tr>
+                                        <td>
+                                            <div style="padding:0 15px 0 15px;">
+                                                <label for="firstName">Ім'я:</label>
+                                                <input class="form-control" name="firstName" required/>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="padding:0 15px 0 15px;">
+                                                <label for="lastName">Прізвище:</label>
+                                                <input class="form-control" name="lastName" required/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="padding:0 15px 0 15px;">
+                                                <label for="login">Логін:</label>
+                                                <input class="form-control" name="login" required/>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="padding:0 15px 0 15px;">
+                                                <label for="role">Рівень доступу:</label>
+                                                <select class="form-control" name="role" id="role" required>
+                                                    <option value="1">Заблокований</option>
+                                                    <option value="3">Авторизований</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <div class="panel-body" style="margin:15px 0 15px 15px;">
+                                    <a id="userFormSubmit" class="btn btn-primary">Зберегти</a>
+                                    <a id="userFormReset" class="btn btn-primary">Очистити</a>
+                                </div>
+                            </form>
+                             <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                                 <div class="container-fluid">
+                                     <span class="navbar-brand">Категорія :</span>
+                                     <a class="navbar-brand btn btn-info" id="ref-AuhtorizedUsers">Авторизовані</a>
+                                     <a class="navbar-brand btn btn-info" id="ref-NonAuhtorizedUsers">Неавторизовані</a>
+                                     <a class="navbar-brand btn btn-info" id="ref-BlockedUsers">Заблоковані</a>
+                                 </div>
+                                 <input class="form-control" id="userSearchField" placeholder="Введіть логін для пошуку..."/>
+                             </nav>
+                             <h3 id="PageUsersCaption">Авторизовані користувачі</h3>
+                             <form name="userTableForm">
+                                 <br>
+                                 <table class="table table-condensed table-striped" style="width:100%;">
+                                     <thead>
+                                         <tr>
+                                             <td>Id</td>
+                                             <td>Логін</td>
+                                             <td>Ім'я</td>
+                                             <td>Прізвище</td>
+                                             <td></td>
+                                             <td></td>
+                                         </tr>
+                                     </thead>
+                                     <tbody id="PageUsersTBody">
 
-                             </tbody>
-                         </table>
-                     </form>`
+                                     </tbody>
+                                 </table>
+                             </form>`
                 );
                 $("#ref-AuhtorizedUsers").on("click", LoadAuthorizedUsers);
                 $("#ref-NonAuhtorizedUsers").on("click", LoadNonAuthorizedUsers);
@@ -469,13 +469,13 @@
             // Сформувати рядок з користувачем для таблиці користувачів
             var row = function (user) {
                 return `<tr data-rowid='${user.id}'>
-                    <td>${user.id}</td>
-                    <td>${user.login}</td>
-                    <td>${user.firstName}</td>
-                    <td>${user.lastName}</td>
-                    <td><a class='editLink btn btn-info' data-id='${user.id}'>Редагувати</a></td>
-                    <td><a class='removeLink btn btn-danger' data-id='${user.id}'>Видалити</a></td>
-                    </tr>`;
+                            <td>${user.id}</td>
+                            <td>${user.login}</td>
+                            <td>${user.firstName}</td>
+                            <td>${user.lastName}</td>
+                            <td><a class='editLink btn btn-info' data-id='${user.id}'>Редагувати</a></td>
+                            <td><a class='removeLink btn btn-danger' data-id='${user.id}'>Видалити</a></td>
+                            </tr>`;
             };
             // Показати в таблиці користувачів повідомлення "Немає користувачів"
             function ThereAreNoUsersTableCaption() {
@@ -570,48 +570,48 @@
             function LoadPageGenres() {
                 $("#pseudobody").html(
                     `<h3>Додати / Редагувати жанр</h3>
-                     <form name="genreForm" style="border:1px solid black;border-radius:5px;">
-                        <input type="hidden" name="Id" value="0" />
-                        <table style="width:100%;">
-                            <tr>
-                                <td>
-                                    <div style="padding:0 15px 0 15px;">
-                                        <label for="name">Назва:</label>
-                                        <input class="form-control" name="name" required/>
-                               </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div style="padding:0 15px 0 15px;">
-                                        <label for="description">Логін:</label>
-                                        <textarea class="form-control" name="description"/>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                        <div class="panel-body" style="margin:15px 0 15px 15px;">
-                            <a id="genreFormSubmit" class="btn btn-primary">Зберегти</a>
-                            <a id="genreFormReset" class="btn btn-primary">Очистити</a>
-                        </div>
-                    </form>
-                 <h1 id="PageGenresCaption">Жанри</h1>
-                 <hr />
-                 <input class="form-control" id="genreSearchField" placeholder="Введіть назву для пошуку..."/>
-                 <table class="table table-condensed table-striped" style="width:100%;">
-                     <thead>
-                         <tr>
-                             <td>Id</td>
-                             <td>Назва</td>
-                             <td>Опис</td>
-                             <td></td>
-                             <td></td>
-                         </tr>
-                     </thead>
-                     <tbody id="PageGenresTBody">
+                             <form name="genreForm" style="border:1px solid black;border-radius:5px;">
+                                <input type="hidden" name="Id" value="0" />
+                                <table style="width:100%;">
+                                    <tr>
+                                        <td>
+                                            <div style="padding:0 15px 0 15px;">
+                                                <label for="name">Назва:</label>
+                                                <input class="form-control" name="name" required/>
+                                       </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="padding:0 15px 0 15px;">
+                                                <label for="description">Логін:</label>
+                                                <textarea class="form-control" name="description"/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <div class="panel-body" style="margin:15px 0 15px 15px;">
+                                    <a id="genreFormSubmit" class="btn btn-primary">Зберегти</a>
+                                    <a id="genreFormReset" class="btn btn-primary">Очистити</a>
+                                </div>
+                            </form>
+                         <h1 id="PageGenresCaption">Жанри</h1>
+                         <hr />
+                         <input class="form-control" id="genreSearchField" placeholder="Введіть назву для пошуку..."/>
+                         <table class="table table-condensed table-striped" style="width:100%;">
+                             <thead>
+                                 <tr>
+                                     <td>Id</td>
+                                     <td>Назва</td>
+                                     <td>Опис</td>
+                                     <td></td>
+                                     <td></td>
+                                 </tr>
+                             </thead>
+                             <tbody id="PageGenresTBody">
 
-                     </tbody>
-                 </table>`
+                             </tbody>
+                         </table>`
                 );
                 $("#genreSearchField").on("input", SearchGenresByName);
                 $("#genreFormReset").on("click", function (e) {
@@ -669,12 +669,12 @@
             // Сформувати рядок з жанром для таблиці жанрів
             var rowGenre = function (genre) {
                 return `<tr data-rowid='${genre.id}'>
-                    <td>${genre.id}</td>
-                    <td>${genre.name}</td>
-                    <td>${genre.description}</td>
-                    <td><a class='editGenreLink btn btn-info' data-id='${genre.id}'>Редагувати</a></td>
-                    <td><a class='removeGenreLink btn btn-danger' data-id='${genre.id}'>Видалити</a></td>
-                    </tr>`;
+                            <td>${genre.id}</td>
+                            <td>${genre.name}</td>
+                            <td>${genre.description}</td>
+                            <td><a class='editGenreLink btn btn-info' data-id='${genre.id}'>Редагувати</a></td>
+                            <td><a class='removeGenreLink btn btn-danger' data-id='${genre.id}'>Видалити</a></td>
+                            </tr>`;
             }
             // Показати в таблиці жанрів повідомлення "Немає жанрів"
             function ThereAreNoGenresTableCaption() {
@@ -819,77 +819,70 @@
                 // браузер знатиме, що з формою потрібно передати файл.
                 $("#pseudobody").html(
                     `<h3 id="songFormCaption"></h3>
-              <form name="songForm" style="border:1px solid black;border-radius:5px;" enctype="multipart/form-data">
-                 <input type="hidden" name="songId" id="songId" value="0" />
-                 <table style="width:100%;">
-                     <tr>
-                         <td>
-                             <div style="padding:0 15px 0 15px;">
-                                 <label for="songName">Назва пісні:</label>
-                                 <input class="form-control" name="songName" id="songName" required/>
-                            </div>
-                         </td>
-                         <td>
-                            <div style="padding:0 15px 0 15px;">
-                                <label for="songSingers">Виконавці:</label>
-                                <input class="form-control" name="songSingers" id="songSingers" required />
-                           </div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td>
-                            <div style="padding:0 15px 0 15px;">
-                                <label for="songUploadedFile">Файл пісні:</label>
-                                <input class="form-control" type="file" name="songUploadedFile" id="songUploadedFile" required />
-                           </div>
-                        </td>
-                        <td>
-                           <div style="padding:0 15px 0 15px;">
-                               <label for="songGenre">Жанр:</label>
-                               <select class="form-control" name="songGenre" id="songGenre" required>
-                                   
-                               </select>
-                          </div>
-                       </td>
-                    </tr>
-                 </table>
-                 <div class="panel-body" style="margin:15px 0 15px 15px;">
-                     <a id="songFormSubmit" class="btn btn-primary">Зберегти</a>
-                     <a id="songFormReset" class="btn btn-primary">Очистити</a>
-                 </div>
-             </form>
-          <h1 id="PageSongsCaption"></h1>
-          <hr />
-          <table class="table table-condensed table-striped" style="width:100%;">
-            <tr>
-                <td><input class="form-control" id="songSearchField" placeholder="Введіть для пошуку..."/></td>
-                <td>
-                    <select class="form-control" name="songSearchParameter" id="songSearchParameter">
-                         <option value="SearchByName">за назвою пісні</option>
-                         <option value="SearchByGenre">за назвою жанру</option>
-                         <option value="SearchBySinger">за виконавцем</option>
-                    </select>
-                </td>
-            </tr>
-          </table>
-          <hr />
-          <table class="table table-condensed table-striped" style="width:100%;">
-              <thead>
-                  <tr>
-                      <td>Назва</td>
-                      <td>Виконавці</td>
-                      <td>Жанр</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                  </tr>
-              </thead>
-              <tbody id="PageSongsTBody">
+                              <form name="songForm" style="border:1px solid black;border-radius:5px;" enctype="multipart/form-data">
+                                 <input type="hidden" name="songId" id="songId" value="0" />
+                                 <table style="width:100%;">
+                                     <tr>
+                                         <td>
+                                             <div style="padding:0 15px 0 15px;">
+                                                 <label for="songName">Назва пісні:</label>
+                                                 <input class="form-control" name="songName" id="songName" required/>
+                                            </div>
+                                         </td>
+                                         <td>
+                                            <div style="padding:0 15px 0 15px;">
+                                                <label for="songSingers">Виконавці:</label>
+                                                <input class="form-control" name="songSingers" id="songSingers" required />
+                                           </div>
+                                        </td>
+                                     </tr>
+                                     <tr>
+                                        <td>
+                                            <div style="padding:0 15px 0 15px;">
+                                                <label for="songUploadedFile">Файл пісні:</label>
+                                                <input class="form-control" type="file" accept="audio/*" name="songUploadedFile" id="songUploadedFile" required />
+                                           </div>
+                                        </td>
+                                        <td>
+                                           <div style="padding:0 15px 0 15px;">
+                                               <label for="songGenre">Жанр:</label>
+                                               <select class="form-control" name="songGenre" id="songGenre" required>
 
-              </tbody>
-          </table>`
+                                               </select>
+                                          </div>
+                                       </td>
+                                    </tr>
+                                 </table>
+                                 <div class="panel-body" style="margin:15px 0 15px 15px;">
+                                     <a id="songFormSubmit" class="btn btn-primary">Зберегти</a>
+                                     <a id="songFormReset" class="btn btn-primary">Очистити</a>
+                                 </div>
+                             </form>
+                              <h1 id="PageSongsCaption"></h1>
+                              <hr />
+                              <table class="table table-condensed table-striped" style="width:100%;">
+                                <tr>
+                                    <td><input class="form-control" id="songSearchField" placeholder="Введіть для пошуку..."/></td>
+                                    <td>
+                                        <select class="form-control" name="songSearchParameter" id="songSearchParameter">
+                                             <option value="SearchByName">за назвою пісні</option>
+                                             <option value="SearchByGenre">за назвою жанру</option>
+                                             <option value="SearchBySinger">за виконавцем</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                              </table>
+                              <hr />
+                              <table class="table table-condensed table-striped" style="width:100%;">
+                                  <thead id="PageSongsTHead">
+
+                                  </thead>
+                                  <tbody id="PageSongsTBody">
+
+                                  </tbody>
+                              </table>`
                 );
-               
+
                 $("#songSearchField").on("input", function () {
                     if ($("#songSearchField").val()) {
                         switch ($("#songSearchParameter").val()) {
@@ -900,14 +893,38 @@
                     }
                     else { LoadSongs(); }
                 });
+                // При натисканні кнопки зберегти - додати нову пісню або редагувати існуючу
+                $("#songFormSubmit").on('click', function () {
+                    // Якщо файл не завантажено, показати повідомлення про помилку
+                    if (document.getElementById("songUploadedFile").files.length == 0) {
+                        alert('Ви не вибрали файл для завантаження!');
+                    }
+                    else if (!$('#songName').val() | !$('#songSingers').val() | !$('#songGenre').val()) {
+                        alert('Всі поля повинні бути заповнені!');
+                    }
+                    else {
+                        if ($('#songId').val() == '0') {
+                            UploadSong();
+                        }
+                        else {
+                            EditSong();
+                        }
+                    }
+                });
+                $("#songFormReset").on('click', function () {
+                    var form = document.forms["songForm"];
+                    form.reset();
+                    form.elements["songId"].value = 0;
+                });
                 LoadSongs();
             }
+            // Посилання на колекцію жанрів, що використовується під час формування списку пісень
             let genresCollection;
             // Відобразити всі пісні
             function LoadSongs() {
                 $("#PageSongsCaption").text('Пісні');
                 SearchingSongsTableCaption();
-                
+
                 $.ajax({
                     url: 'https://localhost:7112/api/Genres',
                     method: "GET",
@@ -917,6 +934,26 @@
                     },
                     contentType: "application/json",
                     success: function (genres) {
+                        // Сформувати шапку таблиці пісень
+                        if ($("#label-roleid").text() == "4") {
+                            $("#PageSongsTHead").html(
+                                `<tr>
+                                            <td style="text-align:center;">Назва</td>
+                                            <td style="text-align:center;">Виконавці</td>
+                                            <td style="text-align:center;">Жанр</td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>`);
+
+                        }
+                        if ($("#label-roleid").text() == "3") {
+                            $("#PageSongsTHead").html(
+                                `<tr>
+                                        <td style="text-align:center;">Назва</td>
+                                        <td style="text-align:center;">Виконавці</td>
+                                        <td style="text-align:center;">Жанр</td>
+                                    </tr>`);
+                        }
                         // Отримати колекцію жанрів
                         genresCollection = Object.values(genres);
                         // Сортувати колекцію жанрів по назві жанру
@@ -926,9 +963,9 @@
                         $.each(genresCollection, function (index, genre) {
                             genreRows += `<option value="${genre.id}">${genre.name}</option>`;
                         })
-                        $("#songGenre").html(genreRows);    
+                        $("#songGenre").html(genreRows);
 
-                        // Сформувати таблицю пісень за допомогою ajax-запиту        
+                        // Сформувати таблицю пісень за допомогою ajax-запиту
                         $.ajax({
                             url: 'https://localhost:7112/api/Songs',
                             method: "GET",
@@ -963,30 +1000,27 @@
                         alert("Помилка під час завантаження жанрів!");
                     }
                 });
-                
-                
-               
             }
             // Сформувати рядок з піснею для таблиці пісень
             var rowSong = function (song, genreName, roleid) {
-                
+
                 if (roleid == "3") {
                     return `<tr data-rowid='${song.id}' data-genreid='${song.genreId}'>
-                            <td>${song.name}</td>
-                            <td>${song.singers}</td>
-                            <td>${genreName}</td>
-                            <td colspan='3'><a class='downloadLink btn btn-primary' data-id='${song.id}'>Завантажити</a></td>
-                            </tr>`;
+                                        <td style="text-align:center;padding:0px;">${song.name}</td>
+                                        <td style="text-align:center;padding:0px;">${song.singers}</td>
+                                        <td style="text-align:center;padding:0px;">${genreName}</td>
+                                    </tr>
+                                    <tr><td colspan='3'><audio controls src="${song.path}" style="width:100%;"></td></tr>`;
                 }
                 if (roleid == "4") {
                     return `<tr data-rowid='${song.id}' data-genreid='${song.genreId}'>
-                            <td>${song.name}</td>
-                            <td>${song.singers}</td>
-                            <td>${genreName}</td>
-                            <td><a class='downloadSongLink btn btn-primary' data-id='${song.id}'>Завантажити</a></td>
-                            <td><a class='editSongLink btn btn-info' data-id='${song.id}'>Редагувати</a></td>
-                            <td><a class='removeSongLink btn btn-danger' data-id='${song.id}'>Видалити</a></td>
-                            </tr>`;
+                                        <td style="text-align:center;padding:0px;">${song.name}</td>
+                                        <td style="text-align:center;padding:0px;">${song.singers}</td>
+                                        <td style="text-align:center;padding:0px;">${genreName}</td>
+                                        <td><a class='editSongLink btn btn-info' data-id='${song.id}'>Редагувати</a></td>
+                                        <td><a class='removeSongLink btn btn-danger' data-id='${song.id}'>Видалити</a></td>
+                                    </tr>
+                                    <tr><td colspan='5'><audio controls src="${song.path}" style="width:100%;"></td></tr>`;
                 }
 
             }
@@ -1116,25 +1150,117 @@
                 }
             }
             // Заповнити форму даними вибраної в списку пісні
-            //function GetSong()
-            //{
-
-            //}
-            //// Завантажити пісню на клієнт
-            //function DownloadSong() { }
-            //// Завантажити пісню на сервер
-            //function UploadSong() { }
-            // Отримати назву жанру для конкретної пісні
-            function GetGenreNameForSong(element, index, array) {
-                
-                
-                
+            function GetSong(id) {
+                $.ajax({
+                    url: `https://localhost:7112/api/Songs/` + id,
+                    method: 'GET',
+                    contentType: "application/json",
+                    success: function (song) {
+                        var form = document.forms["songForm"];
+                        form.elements["songId"].value = song.id;
+                        form.elements["songName"].value = song.name;
+                        form.elements["songSingers"].value = song.singers;
+                        form.elements["songGenre"].value = song.genreId.toString();
+                    },
+                    error: function (x, y, z) {
+                        alert("Помилка під час завантаження даних пісні у форму!");
+                    }
+                });
             }
 
-            //$("body").on("click", ".downloadSongLink", function () {});
-            //$("body").on("click", ".editSongLink", function () {});
-            //$("body").on("click", ".removeSongLink", function () {});
+            // Завантажити пісню на сервер
+            function UploadSong() {
+                var files = document.getElementById('songUploadedFile').files;
+                if (files.length > 0) {
+
+                    var fileForm = new FormData();
+                    fileForm.append(files);
+                    $.ajax({
+                        url: `https://localhost:7112/api/Songs/`,
+                        type: 'POST',
+                        contentType: false, // Указывает тип содержимого, которое будет передано на сервер. 
+                        processData: false, // Логическое значение, устанавливающее, должны ли данные, передающиеся с запросом преобразовываться в строку или нет
+                        data: fileForm,
+                        success: function (path) {
+                            $.ajax({
+                                url: `https://localhost:7112/api/Songs/0`,
+                                method: 'POST',
+                                contentType: "application/json", // Указывает тип содержимого, которое будет передано на сервер.
+                                data:
+                                {
+                                    name: $('#songName').val(),
+                                    singers: $('#songSingers').val(),
+                                    genreId: $('#songGenre').val(),
+                                    path: path
+                                },
+                                success: function (song) {
+                                    alert(`Пісню ${song.name} успішно опубліковано!`);
+                                    LoadPageSongs();
+                                },
+                                error: function (x, y, z) {
+                                    alert("Помилка під час публікації пісні!");
+                                }
+                            });
+                        },
+                        error: function (x, y, z) {
+                            alert("Помилка під час завантаження пісні на сервер!");
+                        }
+                    });
+                }
+            }
+
+
+
+            // Редагувати пісню на сервері
+            function EditSong() { }
+
+
+            // Видалити пісню з БД
+            function DeleteSong(id) {
+                if (confirm('Ви справді хочете видалити пісню?')) {
+                    $.ajax({
+                        url: `https://localhost:7112/api/Songs/` + id,
+                        method: 'DELETE',
+                        contentType: "application/json",
+                        success: function (song) {
+                            alert(`Пісно ${song.name} успішно видалено!`);
+                            $("tr[data-rowid='" + song.id + "']").remove();
+                        },
+                        error: function (x, y, z) {
+                            alert("Помилка під час видалення пісні!");
+                        }
+                    });
+                }
+
+            }
+            // Обробник події- коли вмикається одна пісня, зупиняти всі інші пісні
+            document.addEventListener('play', function (e) {
+                var audios = document.getElementsByTagName('audio');
+                for (var i = 0, len = audios.length; i < len; i++) {
+                    if (audios[i] != e.target) {
+                        audios[i].pause();
+                    }
+                }
+            }, true);
+            // Обробник події на кнопці "Редагувати пісню"
+            $("body").on("click", ".editSongLink", function () {
+                var id = $(this).data("id");
+                GetSong(id);
+            });
+            // Обробник події на кнопці "Видалити пісню"
+            $("body").on("click", ".removeSongLink", function () {
+                var id = $(this).data("id");
+                DeleteSong(id);
+            });
+
+
+            $('input[type=file]').change(function () {
+                console.log(this.files[0].mozFullPath);
+            });
         });
     </script>
 </body>
 </html>
+
+<!--
+}-->
