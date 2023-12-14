@@ -845,8 +845,10 @@
                         </td>
                         <td>
                            <div style="padding:0 15px 0 15px;">
-                               <label for="songGenre">Виконавці:</label>
-                               <select class="form-control" name="songGenre" id="songGenre" required></select>
+                               <label for="songGenre">Жанр:</label>
+                               <select class="form-control" name="songGenre" id="songGenre" required>
+                                   
+                               </select>
                           </div>
                        </td>
                     </tr>
@@ -861,7 +863,13 @@
           <table class="table table-condensed table-striped" style="width:100%;">
             <tr>
                 <td><input class="form-control" id="songSearchField" placeholder="Введіть для пошуку..."/></td>
-                <td><select class="form-control" name="songSearchParameter" id="songSearchParameter"></select></td>
+                <td>
+                    <select class="form-control" name="songSearchParameter" id="songSearchParameter">
+                         <option value="SearchByName">за назвою пісні</option>
+                         <option value="SearchByGenre">за назвою жанру</option>
+                         <option value="SearchBySinger">за виконавцем</option>
+                    </select>
+                </td>
             </tr>
           </table>
           <hr />
@@ -881,32 +889,25 @@
               </tbody>
           </table>`
                 );
-                //$("#genreSearchField").on("input", SearchGenresByName);
-                //$("#genreFormReset").on("click", function (e) {
-                //    e.preventDefault();
-                //    var form = document.forms["genreForm"];
-                //    form.reset();
-                //    form.elements["Id"].value = 0;
-                //});
-                //$("#genreFormSubmit").on("click", function (e) {
-                //    e.preventDefault();
-                //    var form = document.forms["genreForm"];
-                //    var id = form.elements["Id"].value;
-                //    var name = form.elements["name"].value;
-                //    var description = form.elements["description"].value;
-
-                //    if (id != 0)
-                //        EditGenre(id, name, description);
-                //    else
-                //        CreateGenre(name, description);
-                //});
+               
+                $("#songSearchField").on("input", function () {
+                    if ($("#songSearchField").val()) {
+                        switch ($("#songSearchParameter").val()) {
+                            case 'SearchByName': SearchSongsByName(); break;
+                            case 'SearchByGenre': SearchSongsByGenre(); break;
+                            case 'SearchBySinger': SearchSongsBySinger(); break;
+                        }
+                    }
+                    else { LoadSongs(); }
+                });
                 LoadSongs();
             }
+            let genresCollection;
             // Відобразити всі пісні
             function LoadSongs() {
                 $("#PageSongsCaption").text('Пісні');
                 SearchingSongsTableCaption();
-                let genresCollection;
+                
                 $.ajax({
                     url: 'https://localhost:7112/api/Genres',
                     method: "GET",
@@ -916,9 +917,18 @@
                     },
                     contentType: "application/json",
                     success: function (genres) {
+                        // Отримати колекцію жанрів
                         genresCollection = Object.values(genres);
-                        console.log(typeof (genres));
-                        console.log(typeof (genresCollection));
+                        // Сортувати колекцію жанрів по назві жанру
+                        genresCollection.sort((a, b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
+                        // Додати відсортований список жанрів у select для вибору жанрів
+                        var genreRows = "";
+                        $.each(genresCollection, function (index, genre) {
+                            genreRows += `<option value="${genre.id}">${genre.name}</option>`;
+                        })
+                        $("#songGenre").html(genreRows);    
+
+                        // Сформувати таблицю пісень за допомогою ajax-запиту        
                         $.ajax({
                             url: 'https://localhost:7112/api/Songs',
                             method: "GET",
@@ -998,7 +1008,7 @@
                         method: "GET",
                         data: {
                             collectionType: "SearchByName",
-                            searchParameter: $("#songSearchField").text()
+                            searchParameter: $("#songSearchField").val()
                         },
                         contentType: "application/json",
                         success: function (songs) {
@@ -1009,8 +1019,10 @@
                             }
                             else {
                                 $.each(songs, function (index, song) {
-                                    // добавляем полученные элементы в таблицу
-                                    rows += rowSong(song, $("#label-roleid").text());
+                                    // Отримати жанр, який співпадає з genreId даної пісні (у вигляді масиву, треба взяти 0 індекс)
+                                    let genre = genresCollection.filter((g) => g.id == song.genreId);
+                                    // Додати новий рядок в таблицю
+                                    rows += rowSong(song, genre[0].name, $("#label-roleid").text());
                                 })
                             }
 
@@ -1035,7 +1047,7 @@
                         method: "GET",
                         data: {
                             collectionType: "SearchByGenre",
-                            searchParameter: $("#songSearchField").text()
+                            searchParameter: $("#songSearchField").val()
                         },
                         contentType: "application/json",
                         success: function (songs) {
@@ -1046,8 +1058,10 @@
                             }
                             else {
                                 $.each(songs, function (index, song) {
-                                    // добавляем полученные элементы в таблицу
-                                    rows += rowSong(song, $("#label-roleid").text());
+                                    // Отримати жанр, який співпадає з genreId даної пісні (у вигляді масиву, треба взяти 0 індекс)
+                                    let genre = genresCollection.filter((g) => g.id == song.genreId);
+                                    // Додати новий рядок в таблицю
+                                    rows += rowSong(song, genre[0].name, $("#label-roleid").text());
                                 })
                             }
 
@@ -1072,7 +1086,7 @@
                         method: "GET",
                         data: {
                             collectionType: "SearchBySinger",
-                            searchParameter: $("#songSearchField").text()
+                            searchParameter: $("#songSearchField").val()
                         },
                         contentType: "application/json",
                         success: function (songs) {
@@ -1083,8 +1097,10 @@
                             }
                             else {
                                 $.each(songs, function (index, song) {
-                                    // добавляем полученные элементы в таблицу
-                                    rows += rowSong(song, $("#label-roleid").text());
+                                    // Отримати жанр, який співпадає з genreId даної пісні (у вигляді масиву, треба взяти 0 індекс)
+                                    let genre = genresCollection.filter((g) => g.id == song.genreId);
+                                    // Додати новий рядок в таблицю
+                                    rows += rowSong(song, genre[0].name, $("#label-roleid").text());
                                 })
                             }
 
