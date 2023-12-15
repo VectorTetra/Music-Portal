@@ -26,7 +26,7 @@
     <div class="container">
         <main role="main" class="pb-3">
             <div id="pseudobody">
-                <h1 class="display-4">Увійдіть або зареєструйтеся</h1>
+                
             </div>
         </main>
     </div>
@@ -41,8 +41,45 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script>
 
-
         $(document).ready(function () {
+            // В цьому AJAX-запиті відбувається перевірка, чи є сесійні змінні після авторизаціі (для забезпечення доступу)
+            // Якщо вони є - надати доступ відповідно до ролі користувача
+            // Якщо немає - залишити стандартну сторінку
+            $.ajax({
+                url: 'https://localhost:7112/api/Session',
+                contentType: "application/json",
+                method: "GET",
+                success: function (user) {
+                    if (user.login) {
+                        $("#label-fullname").text(`${user.fullName}`);
+                        $("#label-fullname").css("display", "inline");
+                        $("#label-nickname").text(`${user.login}`);
+                        $("#label-nickname").css("display", "inline");
+                        $("#label-roleid").text(`${user.roleId}`);
+                        $("#ref-songs").css("display", "inline");
+                        $("#ref-logout").css("display", "inline");
+                        $("#ref-register").css("display", "none");
+                        $("#ref-login").css("display", "none");
+                        // Якщо це звичайний користувач
+                        if (user.roleId == '3') {
+                            LoadPageSongs();
+                        }
+                        // Якщо це адмін
+                        if (user.roleId == '4') {
+                            $("#ref-users").css("display", "inline");
+                            $("#ref-genres").css("display", "inline");
+                            LoadPageUsers();
+                        }
+                    }
+                    else {
+                        $('#pseudobody').html('<h1 class="display-4">Увійдіть або зареєструйтеся</h1>');
+                    }
+                },
+                error: function (x, y, z) {
+                    alert("Помилка під час запиту сесійних змінних!");
+                }
+            });
+
             $("#ref-register").on("click", LoadPageRegister);
             $("#ref-login").on("click", LoadPageLogin);
             $("#ref-users").on("click", LoadPageUsers);
@@ -187,6 +224,22 @@
                             $("#ref-logout").css("display", "inline");
                             $("#ref-register").css("display", "none");
                             $("#ref-login").css("display", "none");
+                            let userSessionToken = JSON.stringify({
+                                login: user.login,
+                                roleId: user.roleId,
+                                firstName: user.firstName,
+                                lastName : user.lastName
+                            });
+                            $.ajax({
+                                url: 'https://localhost:7112/api/Session',
+                                contentType: "application/json",
+                                method: "POST",
+                                data: userSessionToken,
+                                success: function (userSuccess) {
+                                },
+                                error: function (x, y, z) {
+                                }
+                            });
                             // Якщо це звичайний користувач
                             if (user.roleId == 3) {
                                 LoadPageSongs();
@@ -214,6 +267,15 @@
             // Вийти з акаунту
             function LogOut() {
                 if (confirm("Ви справді хочете вийти з акаунту?")) {
+                    $.ajax({
+                        url: 'https://localhost:7112/api/Session',
+                        contentType: "application/json",
+                        method: "DELETE",
+                        success: function () {
+                        },
+                        error: function (x, y, z) {
+                        }
+                    });
                     $("#pseudobody").html(
                         `<h1 class="display-4">Увійдіть або зареєструйтеся</h1>`
                     );
@@ -1006,17 +1068,17 @@
 
                 if (roleid == "3") {
                     return `<tr data-rowid='${song.id}' data-genreid='${song.genreId}'>
-                                        <td style="text-align:center;padding:0px;">${song.name}</td>
-                                        <td style="text-align:center;padding:0px;">${song.singers}</td>
-                                        <td style="text-align:center;padding:0px;">${genreName}</td>
+                                        <td style="text-align:center;padding:0px;word-wrap:wrap;">${song.name}</td>
+                                        <td style="text-align:center;padding:0px;word-wrap:wrap;">${song.singers}</td>
+                                        <td style="text-align:center;padding:0px;word-wrap:wrap;">${genreName}</td>
                                     </tr>
                                     <tr data-rowid='${song.id}' data-genreid='${song.genreId}'><td colspan='3'><audio controls src="${song.path}" style="width:100%;"></td></tr>`;
                 }
                 if (roleid == "4") {
                     return `<tr data-rowid='${song.id}' data-genreid='${song.genreId}'>
-                                        <td style="text-align:center;padding:0px;">${song.name}</td>
-                                        <td style="text-align:center;padding:0px;">${song.singers}</td>
-                                        <td style="text-align:center;padding:0px;">${genreName}</td>
+                                        <td style="text-align:center;padding:0px;word-wrap:wrap;">${song.name}</td>
+                                        <td style="text-align:center;padding:0px;word-wrap:wrap;">${song.singers}</td>
+                                        <td style="text-align:center;padding:0px;word-wrap:wrap;">${genreName}</td>
                                         <td><a class='editSongLink btn btn-info' data-id='${song.id}'>Редагувати</a></td>
                                         <td><a class='removeSongLink btn btn-danger' data-id='${song.id}'>Видалити</a></td>
                                     </tr>
