@@ -84,11 +84,8 @@ namespace Music_Portal.Controllers
         {
             try
             {
-                //var files = Request.Form.Files;
                 // получаем имя файла
                 string fileName = System.IO.Path.GetFileName(FormFile.FileName);
-                // сохраняем файл в папку Files в проекте
-                //file.Sa(Server.MapPath("~/Files/" + fileName));
 
                 // Путь к папке Files
                 string path = "/Files/" + fileName; // имя файла
@@ -109,13 +106,12 @@ namespace Music_Portal.Controllers
         }
 
         [HttpPost("{id}")]
-        public async Task<ActionResult<SongDTO>> PostSong(string name, string singers, string genreId, string path, int id)
+        public async Task<ActionResult<SongDTO>> PostSong(SongDTO songDTO)
         {
             try
             {
-                var songDTO = new SongDTO { Name = name, GenreId = Convert.ToInt32(genreId), Path = path, Singers = singers };
                 await songService.AddSong(songDTO);
-                return new ObjectResult(path);
+                return new ObjectResult(songDTO);
             }
             catch (ValidationException ex)
             {

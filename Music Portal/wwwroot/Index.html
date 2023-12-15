@@ -1183,17 +1183,20 @@
                         processData: false, // Логическое значение, устанавливающее, должны ли данные, передающиеся с запросом преобразовываться в строку или нет
                         data: fileForm,
                         success: function (path) {
+                            let songName = $('#songName').val();
+                            let songSingers = $('#songSingers').val();
+                            let songGenreId = $('#songGenre').val();
+                            let request = JSON.stringify({
+                                name: songName,
+                                singers: songSingers,
+                                genreId: songGenreId,
+                                path: path
+                            });
                             $.ajax({
                                 url: `https://localhost:7112/api/Songs/0`,
                                 method: 'POST',
                                 contentType: "application/json", // Указывает тип содержимого, которое будет передано на сервер.
-                                data:
-                                {
-                                    name: $('#songName').val(),
-                                    singers: $('#songSingers').val(),
-                                    genreId: $('#songGenre').val(),
-                                    path: path
-                                },
+                                data:request,
                                 success: function (song) {
                                     alert(`Пісню ${song.name} успішно опубліковано!`);
                                     LoadPageSongs();

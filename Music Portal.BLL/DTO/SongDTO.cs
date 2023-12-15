@@ -14,7 +14,7 @@ namespace Music_Portal.BLL.DTO
         [Required(ErrorMessage = "Поле обов'язкове для заповнення.")]
         [Display(Name = "Назва пісні")]
         public string Name { get; set; }
-        [MyAttributeNonEmptyList(ErrorMessage = "У пісні має бути хоча б один виконавець")]
+        [Required(ErrorMessage = "Поле обов'язкове для заповнення.")]
         [Display(Name = "Виконавці")]
         public string Singers { get; set; }
         [Required(ErrorMessage = "Поле обов'язкове для заповнення.")]
