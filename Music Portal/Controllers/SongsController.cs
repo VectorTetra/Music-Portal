@@ -80,25 +80,25 @@ namespace Music_Portal.Controllers
 
         // POST api/<SongsController>
         [HttpPost]
-        public async Task<ActionResult<string>> UploadSong()
+        public async Task<ActionResult<string>> UploadSong([FromForm]IFormFile FormFile)
         {
             try
             {
-                var file = Request.Form.Files[0];
+                //var files = Request.Form.Files;
                 // получаем имя файла
-                string fileName = System.IO.Path.GetFileName(file.FileName);
+                string fileName = System.IO.Path.GetFileName(FormFile.FileName);
                 // сохраняем файл в папку Files в проекте
                 //file.Sa(Server.MapPath("~/Files/" + fileName));
 
                 // Путь к папке Files
-                string path = "/Files/" + file.FileName; // имя файла
+                string path = "/Files/" + fileName; // имя файла
 
                 // Сохраняем файл в папку Files в каталоге wwwroot
                 // Для получения полного пути к каталогу wwwroot
                 // применяется свойство WebRootPath объекта IWebHostEnvironment
                 using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
                 {
-                    await file.CopyToAsync(fileStream); // копируем файл в поток
+                    await FormFile.CopyToAsync(fileStream); // копируем файл в поток
                 }
                 return new ObjectResult(path);
             }
@@ -109,7 +109,7 @@ namespace Music_Portal.Controllers
         }
 
         [HttpPost("{id}")]
-        public async Task<ActionResult<SongDTO>> PostSong(string name, string singers, string genreId, string path)
+        public async Task<ActionResult<SongDTO>> PostSong(string name, string singers, string genreId, string path, int id)
         {
             try
             {

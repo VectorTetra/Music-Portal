@@ -1172,11 +1172,12 @@
             function UploadSong() {
                 var files = document.getElementById('songUploadedFile').files;
                 if (files.length > 0) {
-
+                    
                     var fileForm = new FormData();
-                    fileForm.append(files);
+                    fileForm.append("FormFile",files[0]);
+
                     $.ajax({
-                        url: `https://localhost:7112/api/Songs/`,
+                        url: `https://localhost:7112/api/Songs`,
                         type: 'POST',
                         contentType: false, // Указывает тип содержимого, которое будет передано на сервер. 
                         processData: false, // Логическое значение, устанавливающее, должны ли данные, передающиеся с запросом преобразовываться в строку или нет
