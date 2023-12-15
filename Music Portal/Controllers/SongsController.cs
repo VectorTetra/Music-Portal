@@ -119,12 +119,47 @@ namespace Music_Portal.Controllers
             }
         }
         //// PUT api/<SongsController>/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
+        [HttpPut]
+        public async Task<ActionResult<string>> EditSong([FromForm] IFormFile FormFile)
+        {
+            try
+            {
+                // получаем имя файла
+                string fileName = System.IO.Path.GetFileName(FormFile.FileName);
 
-        //// DELETE api/<SongsController>/5
+                // Путь к папке Files
+                string path = "/Files/" + fileName; // имя файла
+
+                // Сохраняем файл в папку Files в каталоге wwwroot
+                // Для получения полного пути к каталогу wwwroot
+                // применяется свойство WebRootPath объекта IWebHostEnvironment
+                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
+                {
+                    await FormFile.CopyToAsync(fileStream); // копируем файл в поток
+                }
+                return new ObjectResult(path);
+            }
+            catch (ValidationException ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<SongDTO>> PutSong(SongDTO songDTO)
+        {
+            try
+            {
+                await songService.UpdateSong(songDTO);
+                return new ObjectResult(songDTO);
+            }
+            catch (ValidationException ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+        // DELETE api/<SongsController>/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<SongDTO>> DeleteSong(int id)
         {

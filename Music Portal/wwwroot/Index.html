@@ -1010,7 +1010,7 @@
                                         <td style="text-align:center;padding:0px;">${song.singers}</td>
                                         <td style="text-align:center;padding:0px;">${genreName}</td>
                                     </tr>
-                                    <tr><td colspan='3'><audio controls src="${song.path}" style="width:100%;"></td></tr>`;
+                                    <tr data-rowid='${song.id}' data-genreid='${song.genreId}'><td colspan='3'><audio controls src="${song.path}" style="width:100%;"></td></tr>`;
                 }
                 if (roleid == "4") {
                     return `<tr data-rowid='${song.id}' data-genreid='${song.genreId}'>
@@ -1020,7 +1020,7 @@
                                         <td><a class='editSongLink btn btn-info' data-id='${song.id}'>Редагувати</a></td>
                                         <td><a class='removeSongLink btn btn-danger' data-id='${song.id}'>Видалити</a></td>
                                     </tr>
-                                    <tr><td colspan='5'><audio controls src="${song.path}" style="width:100%;"></td></tr>`;
+                                    <tr data-rowid='${song.id}' data-genreid='${song.genreId}'><td colspan='5'><audio controls src="${song.path}" style="width:100%;"></td></tr>`;
                 }
 
             }
@@ -1216,7 +1216,51 @@
 
 
             // Редагувати пісню на сервері
-            function EditSong() { }
+            function EditSong()
+            {
+                var files = document.getElementById('songUploadedFile').files;
+                if (files.length > 0) {
+
+                    var fileForm = new FormData();
+                    fileForm.append("FormFile", files[0]);
+
+                    $.ajax({
+                        url: `https://localhost:7112/api/Songs`,
+                        type: 'PUT',
+                        contentType: false, // Указывает тип содержимого, которое будет передано на сервер. 
+                        processData: false, // Логическое значение, устанавливающее, должны ли данные, передающиеся с запросом преобразовываться в строку или нет
+                        data: fileForm,
+                        success: function (path) {
+                            let songName = $('#songName').val();
+                            let songSingers = $('#songSingers').val();
+                            let songGenreId = $('#songGenre').val();
+                            let request = JSON.stringify({
+                                name: songName,
+                                singers: songSingers,
+                                genreId: songGenreId,
+                                path: path,
+                                id: $('#songId').val()
+                            });
+                            $.ajax({
+                                url: `https://localhost:7112/api/Songs/` + $('#songId').val(),
+                                method: 'PUT',
+                                contentType: "application/json", // Указывает тип содержимого, которое будет передано на сервер.
+                                data: request,
+                                success: function (song) {
+                                    alert(`Пісню ${song.name} успішно відредаговано!`);
+                                    LoadPageSongs();
+                                },
+                                error: function (x, y, z) {
+                                    alert("Помилка під час публікації відредагованої пісні!");
+                                }
+                            });
+                        },
+                        error: function (x, y, z) {
+                            alert("Помилка під час завантаження запису пісні на сервер!");
+                        }
+                    });
+                }
+            }
 
 
             // Видалити пісню з БД
@@ -1265,6 +1309,3 @@
     </script>
 </body>
 </html>
-
-<!--
-}-->
